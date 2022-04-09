@@ -12,7 +12,7 @@ package Entities;
 public class Tournoi {
       private int id;
         private String name;
-        String dateT;
+     private   String dateT;
         private String cathegorie;
         private String Discription;
 
