@@ -25,28 +25,28 @@ public class Pidev3a37 {
      */
     public static void main(String[] args) {
         
-        Coach c1 = new Coach(15,"Nouha","BEN SLIMEN","FPS");
-        Coach p2 = new Coach(40,"Foulen","BEN FOULEN","mmorpg");
+//        Coach c1 = new Coach(15,"Nouha","BEN SLIMEN","FPS");
+//        Coach p2 = new Coach(40,"Foulen","BEN FOULEN","mmorpg");
         
-        Reservation r1 = new Reservation(55,"2022-04-13 12:25:01.0","2022-06-13 12:25:01.0",1);
+        Reservation r1 = new Reservation(55,"2022-04-13 12:25:01.0","2022-06-13 12:25:01.0",0);
         
-        CoachService cs = new CoachService();
-        ReservationService rs = new ReservationService();
-        try {
-          //  cs.ajouter(c1);
-        //cs.ajouter(p2);
-       // cs.Delete(54);
-       // cs.modifier(p2,39);
-            //ps.ajouter(p1);
-            //ps.ajouterr(p2);
-            //System.out.println("personne ajoutee");
-            System.out.println(cs.afficher().toString());
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-
+//        CoachService cs = new CoachService();
+      ReservationService rs = new ReservationService();
+//        try {
+//          //  cs.ajouter(c1);
+//        //cs.ajouter(p2);
+//       // cs.Delete(54);
+//       // cs.modifier(p2,39);
+//            //ps.ajouter(p1);
+//            //ps.ajouterr(p2);
+//            //System.out.println("personne ajoutee");
+//            System.out.println(cs.afficher().toString());
+//            
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//
+//
          try {
             rs.ajouter(r1);
         //cs.ajouter(p2);
@@ -61,6 +61,12 @@ public class Pidev3a37 {
             System.out.println(ex.getMessage());
         }
         
+
+
+
+
+
+
         
         
         

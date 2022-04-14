@@ -68,8 +68,8 @@ String req = "UPDATE reservation SET  tempsstart = ?, tempsend = ?,  dispo = ?, 
             pre = con.prepareStatement(req);
        
       
-       pre.setString(1, t.getTempsend());
-        pre.setString(2, t.getTempsend());
+       pre.setString(1, t.getTempsstart()+"");
+        pre.setString(2, t.getTempsend()+"");
          pre.setString(3, t.getDispo()+"");
           pre.setString(4, t.getCoach()+"");
 

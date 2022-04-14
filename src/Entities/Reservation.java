@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Entities;
-
+import java.sql.Date;
 /**
  *
  * @author xDrais
@@ -84,6 +84,8 @@ public String idtoString ()
     public void setTempsend(String tempsend) {
         this.tempsend = tempsend;
     }
+
+   
 
     public int getDispo() {
         return dispo;
