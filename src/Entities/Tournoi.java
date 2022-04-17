@@ -24,6 +24,10 @@ public class Tournoi {
         this.name = name;
     }
 
+    public Tournoi(int id) {
+        this.id = id;
+    }
+
     public void setDateT(String dateT) {
         this.dateT = dateT;
     }

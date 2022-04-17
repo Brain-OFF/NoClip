@@ -18,6 +18,7 @@ import java.util.List;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -58,10 +59,9 @@ public class PersonneService implements IService<Tournoi> {
         return personnes;
         
     }
-
     @Override
     public void Delete(int id) throws SQLException {
-  String req = "DELETE FROM tournoi WHERE `id` = "+ id;
+     String req = "DELETE FROM tournoi WHERE `id` ="+id;
         stm = con.createStatement();
         stm.executeUpdate(req);
     }
