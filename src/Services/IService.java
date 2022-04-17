@@ -5,6 +5,7 @@
  */
 package Services;
 
+import Entities.User;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface IService<T> {
     void Delete(int id) throws SQLException;
      void modifier(T t,int id)throws SQLException;
     List<T> afficher() throws SQLException;
-    
+    User Login(String U,String pwd) throws SQLException;
     
     
 }

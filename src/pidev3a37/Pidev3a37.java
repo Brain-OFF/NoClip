@@ -27,11 +27,12 @@ public class Pidev3a37 {
         UserService us = new UserService();
         try {
           //us.ajouter(u);
-          us.Delete(7);
+          //us.Delete(7);
           //us.modifier(u, 7);
             //ps.ajouterr(p2);
             //System.out.println("personne ajoutee");
             //System.out.println(us.afficher().toString());
+            us.Login("bingus","walid123456");
             
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

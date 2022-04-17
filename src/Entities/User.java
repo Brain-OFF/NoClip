@@ -12,7 +12,15 @@ package Entities;
 public class User {
     int id,points;
     boolean is_verified;
-    String username,email,password,bio;
+    String username,email,password,bio,status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public User(int points, boolean is_verified, String username, String email, String password, String bio) {
         this.points = points;
@@ -32,6 +40,10 @@ public class User {
         this.email = email;
         this.password = password;
         this.bio = bio;
+    }
+
+    public User() {
+        
     }
 
 

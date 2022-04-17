@@ -9,6 +9,7 @@ import Entities.Personne;
 import Entities.User;
 import Utils.MyDB;
 import java.io.BufferedReader;
+import java.io.CharArrayReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -23,8 +24,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.parser.JSONParser;
 import sun.applet.Main;
 
 /**
@@ -35,6 +38,7 @@ public class UserService implements IService<User> {
 
     Connection con;
     Statement stm;
+    
     private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(Main.class.getName());
     private static HttpURLConnection conn;
     public String encrypt_password(String Username,String Email,String pwd)
@@ -44,7 +48,7 @@ public class UserService implements IService<User> {
 		String line;
 		StringBuilder responseContent = new StringBuilder();
 		try{
-			URL url = new URL("http://127.0.0.1:8000/encrypt_pass?username=tazarkour&email=jaouaniw@gmail.com&password=walid123456");
+			URL url = new URL("http://127.0.0.1:8000/encrypt_pass?username="+Username+"&email="+Email+"&password="+pwd+"");
 			conn = (HttpURLConnection) url.openConnection();
 			
 			// Request setup
@@ -81,6 +85,51 @@ public class UserService implements IService<User> {
                         return responseContent.toString();
 		}
         }
+    public String loginrequest(String Username,String pwd)
+        {
+            
+            BufferedReader reader;
+		String line;
+		StringBuilder responseContent = new StringBuilder();
+		try{
+			URL url = new URL("http://127.0.0.1:8000/loginjava?username="+Username+"&password="+pwd+"");
+			conn = (HttpURLConnection) url.openConnection();
+			
+			// Request setup
+			conn.setRequestMethod("POST");
+			conn.setConnectTimeout(5000);// 5000 milliseconds = 5 seconds
+			conn.setReadTimeout(5000);
+			
+			// Test if the response from the server is successful
+			int status = conn.getResponseCode();
+			
+			if (status >= 300) {
+				reader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+				while ((line = reader.readLine()) != null) {
+					responseContent.append(line);
+				}
+				reader.close();
+			}
+			else {
+				reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				while ((line = reader.readLine()) != null) {
+					responseContent.append(line);
+				}
+				reader.close();
+			}
+			log.info("response code: " + status);
+			System.out.println(responseContent.toString());
+		}
+		catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			conn.disconnect();
+                        return responseContent.toString();
+		}
+        }
+
     public UserService() {
         con = MyDB.getInstance().getCon();
     }
@@ -139,6 +188,30 @@ public class UserService implements IService<User> {
         pre.setString(4, u.getPoints()+"");
         pre.executeUpdate();   
    }
+
+    @Override
+    public User Login(String U,String pwd) throws SQLException {
+        int id=Integer.parseInt(loginrequest(U,pwd));
+        if (id==-1)
+        {
+            System.out.println("error");
+            return null;
+        }
+        else 
+        {
+            String req = "SELECT * FROM `User` WHERE `id`="+id+"";
+        stm = con.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+        System.out.println(rst.toString());
+        User u=new User();
+        while(rst.next()){    
+             u = new User(rst.getInt(1),rst.getString("username"),rst.getString("email"),rst.getString("password"),rst.getInt(7),rst.getString("bio"),rst.getBoolean(9));
+            System.out.println(u);
+            
+        }
+        return u;
+        }
+    }
 
  
 
