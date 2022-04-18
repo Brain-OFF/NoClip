@@ -9,8 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="715.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.FXMLTournoiController">
+<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLTournoiController">
    <children>
       <Label layoutX="52.0" layoutY="41.0" text="name" />
       <Label layoutX="54.0" layoutY="104.0" text="Date" />
@@ -20,8 +19,8 @@
       <DatePicker fx:id="dateT" layoutX="52.0" layoutY="137.0" prefHeight="31.0" prefWidth="187.0" />
       <TextField fx:id="cathegorie" layoutX="48.0" layoutY="200.0" />
       <TextArea fx:id="Discription" layoutX="51.0" layoutY="257.0" prefHeight="63.0" prefWidth="180.0" />
-      <Button fx:id="AddT" layoutX="20.0" layoutY="338.0" mnemonicParsing="false" onAction="#AddT" text="AddT" />
-      <TableView fx:id="tvTour" layoutX="242.0" layoutY="16.0" prefHeight="353.0" prefWidth="463.0">
+      <Button fx:id="AddT" layoutY="338.0" mnemonicParsing="false" onAction="#AddT" text="AddT" />
+      <TableView fx:id="tvTour" layoutX="242.0" layoutY="16.0" onMouseClicked="#tableview_clicked" prefHeight="353.0" prefWidth="463.0">
         <columns>
           <TableColumn fx:id="idT" prefWidth="98.0" text="Id Tournoi" />
           <TableColumn fx:id="nomT" prefWidth="60.0" text="Nom" />
@@ -30,6 +29,7 @@
             <TableColumn fx:id="dateTo" prefWidth="89.0" text="date" />
         </columns>
       </TableView>
-      <Button fx:id="delete" layoutX="93.0" layoutY="338.0" mnemonicParsing="false" onAction="#deleteT" text="Delete" />
+      <Button fx:id="delete" disable="true" layoutX="79.0" layoutY="338.0" mnemonicParsing="false" onAction="#deleteT" text="Delete" />
+      <Button fx:id="updateT" disable="true" layoutX="166.0" layoutY="338.0" mnemonicParsing="false" onAction="#modifierT" text="Modifier" />
    </children>
 </AnchorPane>
