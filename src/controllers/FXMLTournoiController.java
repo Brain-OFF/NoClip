@@ -34,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -58,8 +59,18 @@ public class FXMLTournoiController implements Initializable {
     private TextField nom;
     @FXML
     private DatePicker dateT;
+    ObservableList<String> options = 
+    FXCollections.observableArrayList(
+        "RPG",
+        "MMORPG",
+        "MOBA",
+         "Battle Royale",
+         "Beat Them All",
+         "survival Horror",
+         "RTS"
+    );
     @FXML
-    private TextField cathegorie;
+    private ComboBox<String> cathegorie;
     @FXML
     private TextArea Discription;
     @FXML
@@ -77,6 +88,7 @@ public class FXMLTournoiController implements Initializable {
     @FXML
     private TableColumn<Tournoi, String> dateTo;
     int id_selected;
+
     /**
      * Initializes the controller class.
      */
@@ -88,6 +100,8 @@ public class FXMLTournoiController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {    
         try{
+                cathegorie.setItems(options);
+
         Connection con = MyDB.getInstance().getCon();
         ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi`");
         while(rs.next()){
@@ -96,7 +110,8 @@ public class FXMLTournoiController implements Initializable {
         
         } catch (SQLException ex) {
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
-        }            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
+        }           
+           idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
             nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
             dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
             cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
@@ -107,7 +122,7 @@ public class FXMLTournoiController implements Initializable {
     @FXML
     private void AddT(javafx.event.ActionEvent event) {
           PersonneService T = new PersonneService();
-         Tournoi T1 = new Tournoi(nom.getText(),dateT.getValue().toString(),cathegorie.getText(),Discription.getText());
+         Tournoi T1 = new Tournoi(nom.getText(),dateT.getValue().toString(),cathegorie.getValue().toString(),Discription.getText());
           try {
             T.ajouter(T1);
             tvTour.setItems(list);   
@@ -168,7 +183,7 @@ public class FXMLTournoiController implements Initializable {
         int index = id_selected;
                         PersonneService T = new PersonneService();
 
-           Tournoi t=new Tournoi(nom.getText().toString(),dateT.getValue().toString(),cathegorie.getText().toString(),Discription.getText().toString());
+           Tournoi t=new Tournoi(nom.getText().toString(),dateT.getValue().toString(),cathegorie.getValue().toString(),Discription.getText().toString());
         try {
             T.modifier(t, index);
         } catch (SQLException ex) {
@@ -214,7 +229,7 @@ public class FXMLTournoiController implements Initializable {
 
             nom.setText(tvTour.getSelectionModel().getSelectedItem().getName());
             Discription.setText(tvTour.getSelectionModel().getSelectedItem().getDiscription());
-            cathegorie.setText(tvTour.getSelectionModel().getSelectedItem().getCathegorie());
+            cathegorie.setValue(tvTour.getSelectionModel().getSelectedItem().getCathegorie());
             id_selected=tvTour.getSelectionModel().getSelectedItem().getId();
     }
    
