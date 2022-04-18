@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.FXMLIncriptionController">
+   <children>
+      <TableView fx:id="tv_inc" layoutX="9.0" layoutY="14.0" onMouseClicked="#inc_clicked" prefHeight="298.0" prefWidth="582.0">
+        <columns>
+          <TableColumn fx:id="id_inc" prefWidth="75.0" text="Id_inc" />
+          <TableColumn fx:id="user_name" prefWidth="113.0" text="user_name" />
+            <TableColumn fx:id="email" prefWidth="95.0" text="Email" />
+            <TableColumn fx:id="tournoi_id" prefWidth="109.0" text="Tournoi_id" />
+            <TableColumn fx:id="etat" prefWidth="84.0" text="Etat" />
+            <TableColumn fx:id="Rank" prefWidth="95.0" text="Rank" />
+        </columns>
+      </TableView>
+      <Button fx:id="delete_inc" disable="true" layoutX="514.0" layoutY="319.0" mnemonicParsing="false" onAction="#Delete_inc" prefHeight="31.0" prefWidth="77.0" text="Delete" />
+      <Button fx:id="modif_inc" disable="true" layoutX="513.0" layoutY="350.0" mnemonicParsing="false" onAction="#mofidifier_inc" prefHeight="31.0" prefWidth="77.0" text="Modifier" />
+      <TextField fx:id="name" layoutX="9.0" layoutY="319.0" prefHeight="31.0" prefWidth="118.0" promptText="Username" />
+      <TextField fx:id="email1" layoutX="9.0" layoutY="355.0" prefHeight="31.0" prefWidth="118.0" promptText="Email" />
+      <TextField fx:id="tournoi" layoutX="139.0" layoutY="319.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
+      <RadioButton fx:id="confirmation" layoutX="143.0" layoutY="360.0" mnemonicParsing="false" text="conformation" />
+      <ComboBox fx:id="ranke" layoutX="282.0" layoutY="319.0" prefWidth="150.0" promptText="Rank" />
+   </children>
+</AnchorPane>

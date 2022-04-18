@@ -79,6 +79,14 @@ public class Inscription_t {
         this.tournoi_id = tournoi_id;
     }
 
+    public Inscription_t( String user_name, String email, int etat, String rank) {
+        this.user_name = user_name;
+        this.email = email;
+        this.etat = etat;
+        this.rank = rank;
+    }
+    
+
     public Inscription_t(String user_name, String email, int etat, String rank, int tournoi_id) {
         this.user_name = user_name;
         this.email = email;

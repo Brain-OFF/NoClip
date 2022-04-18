@@ -232,6 +232,21 @@ public class FXMLTournoiController implements Initializable {
             cathegorie.setValue(tvTour.getSelectionModel().getSelectedItem().getCathegorie());
             id_selected=tvTour.getSelectionModel().getSelectedItem().getId();
     }
+private Stage stage;
+ private Scene scene;
+ private Parent root;
+    Statement stm;
+    @FXML
+    private void Trait_inc(javafx.event.ActionEvent event) throws IOException {
+        
+ Parent root = FXMLLoader.load(getClass().getResource("/Gui/FXMLIncription.fxml"));
+           stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+  scene = new Scene(root);
+  stage.setScene(scene);
+  stage.show();
+        
+        
+    }
    
      }
     
