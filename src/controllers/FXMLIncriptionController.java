@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -149,10 +151,19 @@ public class FXMLIncriptionController implements Initializable {
                         Inscroption_TSer T = new Inscroption_TSer();
                         int savedValue = Integer.parseInt(tournoi.getText());
                         int x;
-                        if(confirmation.isSelected()){   Inscription_t t = new Inscription_t(name.getText(),email1.getText().toString(),1,ranke.getValue().toString(),savedValue);;
+                        String b = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+                       Pattern emapat = Pattern.compile(b, Pattern.CASE_INSENSITIVE);
+                        Matcher m = emapat.matcher(email1.getText().toString());
+                        boolean bb;
+                       bb=m.matches();
+                       System.out.println(bb);
+                        if(confirmation.isSelected() && bb==true &&name.getText().length()!=0 && tournoi.getText().toString().length()!=0)
+                        {   Inscription_t t = new Inscription_t(name.getText(),email1.getText().toString(),1,ranke.getValue().toString(),savedValue);;
                         try {
                             
             T.modifierInc(t, index);
+                                                 JOptionPane.showMessageDialog(null, "modif incription avec succée");
+
                              list.clear();
                              try{
         Connection con = MyDB.getInstance().getCon();
@@ -180,7 +191,10 @@ public class FXMLIncriptionController implements Initializable {
         } 
                                
         
-                        }}
+                        }
+                        else                                      JOptionPane.showMessageDialog(null, "modif non traiter!");
+
+                            }
     
     
     

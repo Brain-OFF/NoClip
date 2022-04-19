@@ -21,9 +21,9 @@
          </columns>
       </TableView>
       <TextField fx:id="name" layoutX="38.0" layoutY="47.0" prefHeight="31.0" prefWidth="118.0" promptText="Username" />
-      <TextField fx:id="tournoi" layoutX="37.0" layoutY="175.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
+      <TextField fx:id="tournoi" disable="true" layoutX="37.0" layoutY="175.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
       <ComboBox fx:id="ranke" layoutX="38.0" layoutY="246.0" prefHeight="31.0" prefWidth="118.0" promptText="Rank" />
-      <TextField fx:id="email1" layoutX="37.0" layoutY="105.0" prefHeight="31.0" prefWidth="118.0" promptText="Email" />
+      <TextField fx:id="email1" layoutX="37.0" layoutY="105.0" prefHeight="31.0" prefWidth="118.0" promptText="Email@XXX.XXX" />
       <RadioButton fx:id="confirmation" layoutX="38.0" layoutY="319.0" mnemonicParsing="false" text="conformation" />
       <Button fx:id="Add_in" disable="true" layoutX="132.0" layoutY="366.0" mnemonicParsing="false" onAction="#Add_inc" text="Inscrire" />
    </children>

@@ -88,7 +88,6 @@ public class FXMLTournoiController implements Initializable {
     @FXML
     private TableColumn<Tournoi, String> dateTo;
     int id_selected;
-
     /**
      * Initializes the controller class.
      */
@@ -100,8 +99,9 @@ public class FXMLTournoiController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {    
         try{
+                cathegorie.setValue("Rpg");
                 cathegorie.setItems(options);
-
+                
         Connection con = MyDB.getInstance().getCon();
         ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi`");
         while(rs.next()){
@@ -111,7 +111,7 @@ public class FXMLTournoiController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
         }           
-           idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
+            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
             nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
             dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
             cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
@@ -123,6 +123,7 @@ public class FXMLTournoiController implements Initializable {
     private void AddT(javafx.event.ActionEvent event) {
           PersonneService T = new PersonneService();
          Tournoi T1 = new Tournoi(nom.getText(),dateT.getValue().toString(),cathegorie.getValue().toString(),Discription.getText());
+         if(nom.getText().length()!=0 && Discription.getText().length()!=0 && dateT.getValue().toString().length()!=0){
           try {
             T.ajouter(T1);
             tvTour.setItems(list);   
@@ -132,8 +133,9 @@ public class FXMLTournoiController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("success");
         
-         alert.setContentText("game ajoutée");
+         alert.setContentText("Tournoi ajouter avec succée!");
          alert.show();
+         
          list.clear();
           try{
         Connection con = MyDB.getInstance().getCon();
@@ -144,14 +146,18 @@ public class FXMLTournoiController implements Initializable {
         
         } catch (SQLException ex) {
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
-        }            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
+        }   
+            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
             nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
             dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
             cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
             discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
             tvTour.setItems(list);
-
     }
+         else 
+          JOptionPane.showMessageDialog(null, "error un champ est vide");
+         
+             }
 
     Connection con;
     Statement s;
@@ -169,9 +175,9 @@ public class FXMLTournoiController implements Initializable {
                                        T.Delete(tvTour.getSelectionModel().getSelectedItem().getId());
                                        
                                        
-            JOptionPane.showMessageDialog(null, "Data telah terhapus");
- Tournoi selectedItem = tvTour.getSelectionModel().getSelectedItem();
-    tvTour.getItems().remove(selectedItem);       
+            JOptionPane.showMessageDialog(null, "Data avec succée!");
+            Tournoi selectedItem = tvTour.getSelectionModel().getSelectedItem();
+            tvTour.getItems().remove(selectedItem);       
        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error"+e.getMessage());
 
@@ -182,13 +188,19 @@ public class FXMLTournoiController implements Initializable {
     private void modifierT(javafx.event.ActionEvent event) {
         int index = id_selected;
                         PersonneService T = new PersonneService();
-
            Tournoi t=new Tournoi(nom.getText().toString(),dateT.getValue().toString(),cathegorie.getValue().toString(),Discription.getText().toString());
+                     if(nom.getText().length()!=0 && Discription.getText().length()!=0 && dateT.getValue().toString().length()!=0){
         try {
             T.modifier(t, index);
+            
         } catch (SQLException ex) {
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
         }
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("success");
+        
+         alert.setContentText("Tournoi modifier");
+         alert.show();
          list.clear();
           try{
         Connection con = MyDB.getInstance().getCon();
@@ -206,6 +218,10 @@ public class FXMLTournoiController implements Initializable {
             discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
             tvTour.setItems(list);
     }
+    else
+                                     JOptionPane.showMessageDialog(null, "error un champ est vide");
+
+                         }
     
     /*public void clickItem(MouseEvent event) {
     tvTour.setOnMouseClicked(new EventHandler<MouseEvent>() {
