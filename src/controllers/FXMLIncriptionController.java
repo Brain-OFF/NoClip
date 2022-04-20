@@ -10,10 +10,12 @@ import Entities.Tournoi;
 import Services.Inscroption_TSer;
 import Services.PersonneService;
 import Utils.MyDB;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +25,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
@@ -32,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -158,7 +165,7 @@ public class FXMLIncriptionController implements Initializable {
                        bb=m.matches();
                        System.out.println(bb);
                         if(confirmation.isSelected() && bb==true &&name.getText().length()!=0 && tournoi.getText().toString().length()!=0)
-                        {   Inscription_t t = new Inscription_t(name.getText(),email1.getText().toString(),1,ranke.getValue().toString(),savedValue);;
+                        {   Inscription_t t = new Inscription_t(name.getText(),email1.getText().toString(),1,ranke.getValue().toString(),savedValue);
                         try {
                             
             T.modifierInc(t, index);
@@ -195,9 +202,28 @@ public class FXMLIncriptionController implements Initializable {
                         else                                      JOptionPane.showMessageDialog(null, "modif non traiter!");
 
                             }
+    private Stage stage;
+ private Scene scene;
+ private Parent root;
+    Statement stm;
+    @FXML
+    void back(ActionEvent event) throws IOException {
+Parent root = FXMLLoader.load(getClass().getResource("/Gui/FXMLTournoi.fxml"));
+ stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+  scene = new Scene(root);
+  stage.setScene(scene);
+  scene.getStylesheets().add("/dark-theme.css");
+
+  stage.show();
+        
+        
+    }
+    }
+
     
     
     
     
     
-}
+    
+

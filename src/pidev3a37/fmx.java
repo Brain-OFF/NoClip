@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  */
 public class fmx  extends Application {
     
-   Parent parent ;
+    Parent parent ;
     Stage stage ;
     
     @Override
@@ -34,7 +34,7 @@ public class fmx  extends Application {
             stage.getIcons().add(new Image("sqs.png"));
             scene.getStylesheets().add("/dark-theme.css");
 
-            stage.setTitle("Back    ");
+            stage.setTitle("Back");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(fmx.class.getName()).log(Level.SEVERE, null, ex);
