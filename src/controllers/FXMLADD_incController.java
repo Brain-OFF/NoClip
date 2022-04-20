@@ -33,14 +33,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
-
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
 /**
  * FXML Controller class
  *
  * @author Taha
  */
 public class FXMLADD_incController implements Initializable {
-
+DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
     @FXML
     private TableView<Tournoi> tvTour;
     @FXML
@@ -109,10 +111,22 @@ ObservableList<String> options =
 int id_selected;
     @FXML
     private void tableview_clicked(MouseEvent event) {
-                            System.out.println("Clicked on " + tvTour.getSelectionModel().getSelectedItem().getId()); 
+                               System.out.println("Clicked on " + tvTour.getSelectionModel().getSelectedItem().getId()); 
+                               Tournoi tt = new Tournoi(
+                                       tvTour.getSelectionModel().getSelectedItem().getId(),
+                                      tvTour.getSelectionModel().getSelectedItem().getName(),
+                                       tvTour.getSelectionModel().getSelectedItem().getDateT(),
+                                       tvTour.getSelectionModel().getSelectedItem().getCathegorie(),
+                                       tvTour.getSelectionModel().getSelectedItem().getDiscription()
+                               );
+                               Tournoi td = new Tournoi(now.toString());
+                               if(tt.compareTo(td)>0){
                               Add_in.setDisable(false);
                               int id_selected = tvTour.getSelectionModel().getSelectedItem().getId();
                               tournoi.setText(id_selected+"");
+    } else 
+                                                        Add_in.setDisable(false);
+         
     }
 
     
@@ -128,7 +142,16 @@ int id_selected;
                         boolean bb;
                        bb=m.matches();
                        System.out.println(bb);
-                        if(confirmation.isSelected() && bb==true &&name.getText().length()!=0 && tournoi.getText().toString().length()!=0)
+                       Tournoi tt = new Tournoi(
+                                       tvTour.getSelectionModel().getSelectedItem().getId(),
+                                      tvTour.getSelectionModel().getSelectedItem().getName(),
+                                       tvTour.getSelectionModel().getSelectedItem().getDateT(),
+                                       tvTour.getSelectionModel().getSelectedItem().getCathegorie(),
+                                       tvTour.getSelectionModel().getSelectedItem().getDiscription()
+                               );
+                 Tournoi td = new Tournoi(now.toString());
+
+                   if(confirmation.isSelected() && bb==true &&name.getText().length()!=0 && tournoi.getText().toString().length()!=0 && tt.compareTo(td)>0)
                         {   Inscription_t t = new Inscription_t(name.getText(),email1.getText().toString(),1,ranke.getValue().toString(),savedValue);
                             
             T.ajouterInc(t);
@@ -140,7 +163,7 @@ int id_selected;
         Connection con = MyDB.getInstance().getCon();
         ranke.setItems(options);
                 }else 
-         JOptionPane.showMessageDialog(null, "error un champ est vide ou email  incorrecte ");
+         JOptionPane.showMessageDialog(null, "error un champ est vide ou email ou date incorrecte ");
     }
 }   
 

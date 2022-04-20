@@ -13,7 +13,8 @@ import Services.PersonneService;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;   
 /**
  *
  * @author macbook
@@ -37,6 +38,9 @@ public class Pidev3a37 {
             //ps.ajouterr(p2);
             //System.out.println("personne ajoutee");
             System.out.println(ps.afficher().toString());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
+            System.out.println(dtf.format(now)+"");  
             //inc1.ajouterInc(incT);
             //inc1.DeleteInc(60);
             // inc1.modifierInc(incT,55);

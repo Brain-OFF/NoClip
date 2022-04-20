@@ -9,7 +9,7 @@ package Entities;
  *
  * @author Taha
  */
-public class Tournoi {
+public class Tournoi implements Comparable<Tournoi>{
       private int id;
         private String name;
      private   String dateT;
@@ -87,5 +87,18 @@ public class Tournoi {
         this.name = name;
         this.cathegorie = cathegorie;
     }
+
+    public Tournoi(String dateT) {
+        this.dateT = dateT;
+    }
+    
+    
+
+      @Override
+      public int compareTo(Tournoi s) {
+return dateT.compareTo(s.getDateT());
+}
+     
+    
     }       
 

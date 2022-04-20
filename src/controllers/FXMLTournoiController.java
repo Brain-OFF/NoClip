@@ -45,7 +45,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import pidev3a37.fmx;
-
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
 /**
  * FXML Controller class
  *
@@ -54,7 +55,8 @@ import pidev3a37.fmx;
 public class FXMLTournoiController implements Initializable {
     ObservableList<Tournoi> data = FXCollections.observableArrayList();
 
-
+DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
     @FXML
     private TextField nom;
     @FXML
@@ -101,7 +103,7 @@ public class FXMLTournoiController implements Initializable {
         try{
                 cathegorie.setValue("Rpg");
                 cathegorie.setItems(options);
-                
+                dateT.setValue(LocalDate.now());
         Connection con = MyDB.getInstance().getCon();
         ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi`");
         while(rs.next()){
@@ -122,8 +124,10 @@ public class FXMLTournoiController implements Initializable {
     @FXML
     private void AddT(javafx.event.ActionEvent event) {
           PersonneService T = new PersonneService();
-         Tournoi T1 = new Tournoi(nom.getText(),dateT.getValue().toString(),cathegorie.getValue().toString(),Discription.getText());
-         if(nom.getText().length()!=0 && Discription.getText().length()!=0 && dateT.getValue().toString().length()!=0){
+                          Tournoi T1 = new Tournoi(nom.getText(),dateT.getValue().toString(),cathegorie.getValue().toString(),Discription.getText());
+                          Tournoi td = new Tournoi(now.toString());
+
+         if(nom.getText().length()!=0 && Discription.getText().length()!=0 && dateT.getValue().toString().length()!=0 && T1.compareTo(td)>0){
           try {
             T.ajouter(T1);
             tvTour.setItems(list);   
@@ -155,7 +159,7 @@ public class FXMLTournoiController implements Initializable {
             tvTour.setItems(list);
     }
          else 
-          JOptionPane.showMessageDialog(null, "error un champ est vide");
+          JOptionPane.showMessageDialog(null, "error un champ est vide ou date in correcte ");
          
              }
 
@@ -259,11 +263,14 @@ private Stage stage;
            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
   scene = new Scene(root);
   stage.setScene(scene);
+  scene.getStylesheets().add("/dark-theme.css");
+
   stage.show();
         
         
     }
-   
+    
      }
+
     
 
