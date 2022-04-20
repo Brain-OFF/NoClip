@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="821.0" prefWidth="1142.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.MainWindowController">
    <children>
-      <TableView fx:id="User_table" layoutX="250.0" layoutY="39.0" onMouseClicked="#Table_user_clicked" prefHeight="767.0" prefWidth="877.0">
+      <TableView fx:id="User_table" layoutX="250.0" layoutY="39.0" onMouseClicked="#Table_user_clicked" prefHeight="709.0" prefWidth="877.0">
         <columns>
           <TableColumn id="id_user" fx:id="id_user" editable="false" prefWidth="75.0" text="ID" />
           <TableColumn id="username_table" fx:id="username_table" prefWidth="117.0" text="Username" />
@@ -38,5 +38,6 @@
          </image>
       </ImageView>
       <Label fx:id="label_selected_id_user" layoutX="37.0" layoutY="517.0" prefHeight="21.0" prefWidth="138.0" text="Selected ID : " />
+      <Label fx:id="User_logged_label" layoutX="250.0" layoutY="772.0" text="Not Connected" textFill="RED" />
    </children>
 </AnchorPane>

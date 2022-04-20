@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+<AnchorPane id="AnchorPane" prefHeight="648.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.LoginController">
+   <children>
+      <TextField fx:id="username_log" layoutX="56.0" layoutY="204.0" prefHeight="31.0" prefWidth="232.0" />
+      <Label layoutX="106.0" layoutY="90.0" text="LOGIN">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="164.0" prefHeight="21.0" prefWidth="110.0" text="Username" />
+      <Label layoutX="56.0" layoutY="264.0" text="Password" />
+      <Label layoutX="494.0" layoutY="90.0" text="REGISTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="login_button" layoutX="56.0" layoutY="366.0" mnemonicParsing="false" onAction="#login_pressed" text="Login" />
+      <TextField fx:id="username_reg" layoutX="464.0" layoutY="204.0" prefHeight="31.0" prefWidth="244.0" />
+      <TextField fx:id="email_reg" layoutX="464.0" layoutY="283.0" prefHeight="31.0" prefWidth="244.0" />
+      <CheckBox fx:id="checkbox_register" layoutX="464.0" layoutY="515.0" mnemonicParsing="false" text="I Agree to terms and services" />
+      <PasswordField fx:id="password_reg" layoutX="464.0" layoutY="366.0" prefHeight="31.0" prefWidth="244.0" />
+      <PasswordField fx:id="conf_pass_reg" layoutX="464.0" layoutY="444.0" prefHeight="31.0" prefWidth="244.0" />
+      <Button layoutX="462.0" layoutY="573.0" mnemonicParsing="false" onAction="#register" text="Register" />
+      <Label layoutX="462.0" layoutY="175.0" text="Uername" />
+      <Label layoutX="462.0" layoutY="254.0" text="Email" />
+      <Label layoutX="463.0" layoutY="336.0" text="Password" />
+      <Label layoutX="463.0" layoutY="414.0" text="Confirm Password" />
+      <ImageView fitHeight="127.0" fitWidth="103.0" layoutX="332.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@4.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="password_log" layoutX="57.0" layoutY="309.0" prefHeight="31.0" prefWidth="232.0" />
+   </children>
 </AnchorPane>

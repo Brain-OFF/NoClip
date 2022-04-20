@@ -211,8 +211,9 @@ public class UserService implements IService<User> {
         int id=Integer.parseInt(loginrequest(U,pwd));
         if (id==-1)
         {
+            User u=new User(-1,"","","",0,"",false,"");
             System.out.println("error");
-            return null;
+            return u;
         }
         else 
         {

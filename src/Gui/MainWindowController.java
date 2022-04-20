@@ -6,6 +6,7 @@
 package Gui;
 
 import Entities.User;
+import Entities.loggedUser;
 import java.net.URL;
 import Utils.MyDB;
 import java.sql.Connection;
@@ -50,6 +51,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import pidev3a37.fmx;
@@ -96,6 +98,7 @@ public class MainWindowController implements Initializable {
         "writer",
         "user"
     );
+    User Current_user;
     ObservableList <User> list = FXCollections.observableArrayList();
     @FXML
     private TableColumn<User, Integer> id_user;
@@ -113,6 +116,8 @@ public class MainWindowController implements Initializable {
     private TableColumn<User, String> status_table;
     @FXML
     private Label label_selected_id_user;
+    @FXML
+    private Label User_logged_label;
     /**
      * Initializes the controller class.
      */
@@ -181,7 +186,20 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
              
+            try
+            {
             filltable();
+            loggedUser holder = loggedUser.get_instace();
+            Current_user= loggedUser.get_instace().getUser();
+
+            System.out.println("current"+Current_user);
+            User_logged_label.setText("Current User: " +Current_user.getUsername() +"#"+Current_user.getId());
+            User_logged_label.setTextFill(Color.web("#00FF00", 0.8));
+            }
+            catch (Exception e)
+                    {
+                         exceptionerror(e);
+                    }
     }   
 
     @FXML
