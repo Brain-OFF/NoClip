@@ -8,6 +8,7 @@ package Services;
 import Entities.User;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -21,6 +22,7 @@ public interface IService<T> {
      void modifier(T t,int id)throws SQLException;
     List<T> afficher() throws SQLException;
     User Login(String U,String pwd) throws SQLException;
+    public ObservableList<User> afficherobs() throws SQLException;
     
     
 }

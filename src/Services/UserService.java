@@ -27,6 +27,8 @@ import java.sql.Connection;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import jdk.nashorn.internal.parser.JSONParser;
 import sun.applet.Main;
 
@@ -139,8 +141,8 @@ public class UserService implements IService<User> {
         String pwd=encrypt_password(u.getUsername(),u.getEmail(),u.getPassword());
         pwd.replace("\"", "");
         System.out.println(pwd);
-        String req = "INSERT INTO `user`( `username`, `email`, `password`, `bio`, `points`,`is_verified`,`roles`)VALUES ( '"+ u.getUsername()+ "', '" + u.getEmail() + "', " 
-        + pwd + ", '" + u.getBio() + "', '" + u.getPoints()+ "', '" + 0  + "', '" + null + "') ";
+        String req = "INSERT INTO `user`( `username`, `email`, `password`, `bio`, `points`,`is_verified`,`roles`,`status`)VALUES ( '"+ u.getUsername()+ "', '" + u.getEmail() + "', " 
+        + pwd + ", '" + u.getBio() + "', '" + u.getPoints()+ "', '" + 0  + "', '" + null + "', '"+u.getStatus()+"' ) ";
         stm = con.createStatement();
         stm.executeUpdate(req);
 
@@ -155,7 +157,22 @@ public class UserService implements IService<User> {
         List<User> personnes = new ArrayList<User>();
         while(rst.next()){
             
-            User u = new User(rst.getInt(1),rst.getString("username"),rst.getString("email"),rst.getString("password"),rst.getInt(7),rst.getString("bio"),rst.getBoolean(9));
+            User u = new User(rst.getInt(1),rst.getString("username"),rst.getString("email"),rst.getString("password"),rst.getInt(7),rst.getString("bio"),rst.getBoolean(9),rst.getString("status"));
+            personnes.add(u);
+        }
+        return personnes;
+        
+    }
+    @Override
+    public ObservableList<User> afficherobs() throws SQLException {
+        String req = "SELECT * FROM `user`";
+        stm = con.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+        System.out.println(rst.toString());
+        ObservableList<User> personnes = FXCollections.observableArrayList();
+        while(rst.next()){
+            
+            User u = new User(rst.getInt(1),rst.getString("username"),rst.getString("email"),rst.getString("password"),rst.getInt(7),rst.getString("bio"),rst.getBoolean(9),rst.getString("status"));
             personnes.add(u);
         }
         return personnes;
@@ -205,7 +222,7 @@ public class UserService implements IService<User> {
         System.out.println(rst.toString());
         User u=new User();
         while(rst.next()){    
-             u = new User(rst.getInt(1),rst.getString("username"),rst.getString("email"),rst.getString("password"),rst.getInt(7),rst.getString("bio"),rst.getBoolean(9));
+             u = new User(rst.getInt(1),rst.getString("username"),rst.getString("email"),rst.getString("password"),rst.getInt(7),rst.getString("bio"),rst.getBoolean(9),rst.getString("status"));
             System.out.println(u);
             
         }

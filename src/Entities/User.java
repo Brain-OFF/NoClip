@@ -22,17 +22,18 @@ public class User {
         this.status = status;
     }
 
-    public User(int points, boolean is_verified, String username, String email, String password, String bio) {
+    public User(int points, boolean is_verified, String username, String email, String password, String bio,String status) {
         this.points = points;
         this.is_verified = is_verified;
         this.username = username;
         this.email = email;
         this.password = password;
         this.bio = bio;
+        this.status=status;
     }
     
 
-    public User(int id,String username, String email, String password,int points, String bio,  boolean is_verified ) {
+    public User(int id,String username, String email, String password,int points, String bio,  boolean is_verified ,String status) {
         this.id = id;
         this.points = points;
         this.is_verified = is_verified;
@@ -40,6 +41,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.bio = bio;
+        this.status=status;
     }
 
     public User() {

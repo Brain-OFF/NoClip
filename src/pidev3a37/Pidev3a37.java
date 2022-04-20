@@ -23,7 +23,7 @@ public class Pidev3a37 {
      */
     public static void main(String[] args) {
         
-        User u = new User(7, false, "tazarkour", "jaouaniaaw@gmail.com", "wzeazeazeaz", "hehe");
+        //User u = new User(7, false, "tazarkour", "jaouaniaaw@gmail.com", "wzeazeazeaz", "hehe");
         UserService us = new UserService();
         try {
           //us.ajouter(u);
@@ -31,8 +31,8 @@ public class Pidev3a37 {
           //us.modifier(u, 7);
             //ps.ajouterr(p2);
             //System.out.println("personne ajoutee");
-            //System.out.println(us.afficher().toString());
-            us.Login("bingus","walid123456");
+            System.out.println(us.afficher().toString());
+            //us.Login("bingus","walid123456");
             
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
