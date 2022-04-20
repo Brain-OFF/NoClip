@@ -111,6 +111,8 @@ public class MainWindowController implements Initializable {
     private TableColumn<User, Integer> points_table;
     @FXML
     private TableColumn<User, String> status_table;
+    @FXML
+    private Label label_selected_id_user;
     /**
      * Initializes the controller class.
      */
@@ -143,10 +145,9 @@ public class MainWindowController implements Initializable {
             expContent.add(label, 0, 0);
             expContent.add(textArea, 0, 1);
 
-// Set expandable Exception into the dialog pane.
-alert.getDialogPane().setExpandableContent(expContent);
-
-alert.showAndWait();
+            // Set expandable Exception into the dialog pane.
+            alert.getDialogPane().setExpandableContent(expContent);
+            alert.showAndWait();
     }
     
     
@@ -185,7 +186,13 @@ alert.showAndWait();
 
     @FXML
     private void Table_user_clicked(MouseEvent event) {
-        
+        del_user.setDisable(false);
+        update_user.setDisable(false);
+        label_selected_id_user.setText("Selected id : "+User_table.getSelectionModel().getSelectedItem().getId());
+        Username_text.setText(User_table.getSelectionModel().getSelectedItem().getUsername());
+        Email_text.setText(User_table.getSelectionModel().getSelectedItem().getEmail());
+        bio_text.setText(User_table.getSelectionModel().getSelectedItem().getBio());
+        pts_text.setText(User_table.getSelectionModel().getSelectedItem().getPoints()+"");
     }
 
     @FXML
@@ -234,10 +241,74 @@ alert.showAndWait();
 
     @FXML
     private void del_user_clicked(MouseEvent event) {
+            boolean success = false;
+            ServU=new UserService();
+            try{
+            ServU.Delete(User_table.getSelectionModel().getSelectedItem().getId());
+            success=true;
+            }
+            catch (SQLException ex)
+            {
+                /*Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+            alert.setHeaderText("SQL Exception");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();*/
+                exceptionerror(ex);
+            }
+            if (success)
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("User Deleted");
+                alert.setContentText("User Deleted From the Database");
+                alert.showAndWait();
+                filltable();
+            }
+        
     }
 
     @FXML
     private void update_user_clicked(MouseEvent event) {
+        if ((Username_text.getText().length()<=0||Username_text.getText().length()>25)||(Email_text.getText().length()<=0||Email_text.getText().length()>50)||
+                (pwd_text.getText().length()<=0||pwd_text.getText().length()>50))
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Cannot Perform Add");
+            alert.setContentText("Please fill all the the fields before adding");
+            alert.showAndWait();
+        }
+        else
+        {
+            boolean success = false;
+            ServU=new UserService();
+            try{
+            User U=new User(parseInt(pts_text.getText().toString()), false,Username_text.getText().toString() , Email_text.getText().toString(), pwd_text.getText().toString(),
+                    bio_text.getText().toString(),status_text.getValue().toString());
+            ServU.modifier(U, User_table.getSelectionModel().getSelectedItem().getId());
+            success=true;
+            }
+            catch (SQLException ex)
+            {
+                /*Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+            alert.setHeaderText("SQL Exception");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();*/
+                exceptionerror(ex);
+            }
+            if (success)
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("User Modified");
+                alert.setContentText("User Has Been Updated");
+                alert.showAndWait();
+                filltable();
+            }
+            
+        }
     }
     }    
     

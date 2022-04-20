@@ -34,7 +34,9 @@ public class Main extends Application {
             this.stage = primaryStage ;
             parent =FXMLLoader.load(getClass().getResource("/Gui/MainWindow.fxml"));
             Scene scene =new Scene(parent);
+            
             stage.setScene(scene);
+            scene.getStylesheets().add("/dark-theme.css");
             stage.getIcons().add(new Image("4.png"));
            // scene.getStylesheets().add("/dark-theme.css");
 
