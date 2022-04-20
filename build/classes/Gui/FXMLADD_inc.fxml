@@ -11,13 +11,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.FXMLADD_incController">
    <children>
-      <TableView fx:id="tvTour" layoutX="210.0" onMouseClicked="#tableview_clicked" prefHeight="411.0" prefWidth="491.0">
+      <TableView fx:id="tvTour" layoutX="173.0" onMouseClicked="#tableview_clicked" prefHeight="411.0" prefWidth="528.0">
          <columns>
             <TableColumn fx:id="idT" prefWidth="98.0" text="Id Tournoi" />
             <TableColumn fx:id="nomT" prefWidth="60.0" text="Nom" />
             <TableColumn fx:id="cathT" prefWidth="87.0" text="Cthegorie" />
             <TableColumn fx:id="discT" minWidth="0.0" prefWidth="128.0" text="Discription" />
-            <TableColumn fx:id="dateTo" prefWidth="117.0" text="date" />
+            <TableColumn fx:id="dateTo" prefWidth="154.0" text="date" />
          </columns>
       </TableView>
       <TextField fx:id="name" layoutX="38.0" layoutY="47.0" prefHeight="31.0" prefWidth="118.0" promptText="Username" />
@@ -25,6 +25,6 @@
       <ComboBox fx:id="ranke" layoutX="38.0" layoutY="246.0" prefHeight="31.0" prefWidth="118.0" promptText="Rank" />
       <TextField fx:id="email1" layoutX="37.0" layoutY="105.0" prefHeight="31.0" prefWidth="118.0" promptText="Email@XXX.XXX" />
       <RadioButton fx:id="confirmation" layoutX="38.0" layoutY="319.0" mnemonicParsing="false" text="conformation" />
-      <Button fx:id="Add_in" disable="true" layoutX="132.0" layoutY="366.0" mnemonicParsing="false" onAction="#Add_inc" text="Inscrire" />
+      <Button fx:id="Add_in" disable="true" layoutX="14.0" layoutY="366.0" mnemonicParsing="false" onAction="#Add_inc" text="Inscrire" />
    </children>
 </AnchorPane>

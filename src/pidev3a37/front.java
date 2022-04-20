@@ -13,6 +13,7 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -31,6 +32,9 @@ public class front extends Application {
             parent =FXMLLoader.load(getClass().getResource("/Gui/FXMLADD_inc.fxml"));
             Scene scene =new Scene(parent);
             stage.setScene(scene);
+            stage.setScene(scene);
+            stage.getIcons().add(new Image("sqs.png"));
+                        scene.getStylesheets().add("/dark-theme.css");
             stage.setTitle("Add incription");
             stage.show();
         } catch (IOException ex) {

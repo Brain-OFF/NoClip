@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -30,7 +31,10 @@ public class fmx  extends Application {
             parent =FXMLLoader.load(getClass().getResource("/Gui/FXMLTournoi.fxml"));
             Scene scene =new Scene(parent);
             stage.setScene(scene);
-            stage.setTitle("gestion Tournoi");
+            stage.getIcons().add(new Image("sqs.png"));
+            scene.getStylesheets().add("/dark-theme.css");
+
+            stage.setTitle("Back    ");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(fmx.class.getName()).log(Level.SEVERE, null, ex);
