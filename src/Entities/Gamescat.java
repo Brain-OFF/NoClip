@@ -16,6 +16,15 @@ public class Gamescat {
     public Gamescat() {
     }
 
+    public Gamescat(String nom) {
+        this.nom = nom;
+    }
+
+    public Gamescat(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
+
     public Gamescat(String nom, String description) {
         this.nom = nom;
         this.description = description;

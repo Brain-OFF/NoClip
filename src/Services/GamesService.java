@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -27,7 +29,7 @@ public class GamesService implements IService<Games>{
        
      Connection con;
     Statement stm;
-
+    PreparedStatement ste;
     public GamesService() {
         con = MyDB.getInstance().getCon();
     }
@@ -37,6 +39,32 @@ public class GamesService implements IService<Games>{
                 + t.getName()+ "', '" + t.getDescreption()+ "', '" + t.getPrix()+ "', '" + t.getImg()+ "') ";
         stm = con.createStatement();
         stm.executeUpdate(req);
+    }
+     
+    public void ajouterjoint(String a)  {
+      
+         Connection con = MyDB.getInstance().getCon();
+    try {
+         int k=0;
+         int c=0;
+        
+        ResultSet rs = con.createStatement().executeQuery("Select Max(id) id from Games ");
+        ResultSet rs1 = con.createStatement().executeQuery("Select * from Gamescat WHERE nom = '"+ a +"'");
+        while(rs.next()){
+        System.out.println(rs.getInt("id"));
+         k =rs.getInt("id");
+       
+        }
+         while(rs1.next()){  c=  rs1.getInt(1);}
+         
+       String req = "INSERT INTO `games_gamescat` (`games_id`, `gamescat_id`) VALUES ( '"
+                +k+  "', '"+ c+ "') ";
+        stm = con.createStatement();
+        stm.executeUpdate(req);
+    } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
     }
 
     @Override
@@ -54,6 +82,24 @@ public class GamesService implements IService<Games>{
     }
         return Games;
         
+    }
+        public List<Games> displayProduitService() {
+        //nteger id, Integer id_categorie, String titre, String description, String type, float prix_unitaire
+        List<Games> myList = new ArrayList<>();
+        try {
+            String requete = "SELECT * FROM games ";
+            ste = con.prepareStatement(requete);
+            
+              ResultSet rst = stm.executeQuery(requete);
+            while (rst.next()) {
+               Games c = new Games(rst.getInt(1),rst.getFloat(4),rst.getString(3),rst.getString(2),rst.getString(5));
+                myList.add(c);
+            }
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+        return myList;
     }
 
     @Override

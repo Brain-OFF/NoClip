@@ -17,6 +17,11 @@ public class Games {
     public Games() {
     }
 
+    public Games(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Games(int id, float prix, String name, String descreption, String img) {
         this.id = id;
         this.prix = prix;

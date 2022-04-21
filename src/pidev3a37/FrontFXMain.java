@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author month
  */
-public class testFXMain extends Application {
+public class FrontFXMain extends Application {
     
    Parent parent ;
     Stage stage ;
@@ -32,11 +32,9 @@ public class testFXMain extends Application {
     public void start(Stage primaryStage) {
         try {
             this.stage = primaryStage ;
-            parent =FXMLLoader.load(getClass().getResource("/Gui/GestionGamesFXML.fxml"));
+            parent =FXMLLoader.load(getClass().getResource("/Gui/AfficheGames.fxml"));
             Scene scene =new Scene(parent);
             stage.setScene(scene);
-            stage.getIcons().add(new Image("sqs.png"));
-            scene.getStylesheets().add("/dark-theme.css");
             stage.setTitle("gestion Games");
             stage.show();
         } catch (IOException ex) {

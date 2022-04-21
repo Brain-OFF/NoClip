@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author month
  */
-public class testFXMain extends Application {
+public class testFXMain1 extends Application {
     
    Parent parent ;
     Stage stage ;
@@ -32,7 +32,7 @@ public class testFXMain extends Application {
     public void start(Stage primaryStage) {
         try {
             this.stage = primaryStage ;
-            parent =FXMLLoader.load(getClass().getResource("/Gui/GestionGamesFXML.fxml"));
+            parent =FXMLLoader.load(getClass().getResource("/Gui/GestionGamescatFXML.fxml"));
             Scene scene =new Scene(parent);
             stage.setScene(scene);
             stage.getIcons().add(new Image("sqs.png"));
@@ -40,7 +40,7 @@ public class testFXMain extends Application {
             stage.setTitle("gestion Games");
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(testFXMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(testFXMain1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

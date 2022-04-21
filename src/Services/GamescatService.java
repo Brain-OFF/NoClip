@@ -63,7 +63,7 @@ public class GamescatService implements IService<Gamescat>{
 
     @Override
     public void modifier(Gamescat t, int id) throws SQLException {
-String req = "UPDATE Games SET  name = ?, descreption = ?,  prix = ?, img = ? where id= " + id;
+String req = "UPDATE Gamescat SET  nom = ?, description = ? where id= " + id;
         PreparedStatement pre;
 
             pre = con.prepareStatement(req);
