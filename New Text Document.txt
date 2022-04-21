@@ -1,0 +1,2 @@
+stage.getIcons().add(new Image("sqs.png"));
+            scene.getStylesheets().add("/dark-theme.css");
