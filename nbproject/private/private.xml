@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Gui/TestFXML.fxml</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/CoachFrontFXML.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/ReservationFXMLController.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Services/CoachService.java</file>
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Entities/Reservation.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Gui/CoachFrontFXML.fxml</file>
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Services/ReservationService.java</file>
-            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/pidev3a37/Pidev3a37.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/pidev3a37/FXMLTEST.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Gui/ReservationFXML.fxml</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/pidev3a37/coachfront.java</file>
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/TestFXMLController.java</file>
         </group>
     </open-files>

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author macbook
  */
-public class Pidev3a37 {
+public class Pidev3a37  {
 
     /**
      * @param args the command line arguments
@@ -32,34 +32,7 @@ public class Pidev3a37 {
         
 //        CoachService cs = new CoachService();
       ReservationService rs = new ReservationService();
-//        try {
-//          //  cs.ajouter(c1);
-//        //cs.ajouter(p2);
-//       // cs.Delete(54);
-//       // cs.modifier(p2,39);
-//            //ps.ajouter(p1);
-//            //ps.ajouterr(p2);
-//            //System.out.println("personne ajoutee");
-//            System.out.println(cs.afficher().toString());
-//            
-//        } catch (SQLException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//
-//
-         try {
-            rs.ajouter(r1);
-        //cs.ajouter(p2);
-       //rs.Delete(62);
-       // rs.modifier(p2,39);
-            //ps.ajouter(p1);
-            //ps.ajouterr(p2);
-            //System.out.println("personne ajoutee");
-            System.out.println(rs.afficher().toString());
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+
         
 
 

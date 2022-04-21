@@ -66,15 +66,14 @@ public class CoachService implements IService<Coach> {
 
 
     public void modifier(Coach t, int id) throws SQLException {
-  String req = "UPDATE coach SET  name = ?, lastname = ?,  rank = ?, categorie = ? where id= " + id;
+  String req = "UPDATE coach SET  rank = ?, lastname = ?,  name = ?, categorie = ? where id= " + id;
         PreparedStatement pre;
 
             pre = con.prepareStatement(req);
        
-      
-       pre.setString(1, t.getName());
+      pre.setString(1, t.getRank()+"");
         pre.setString(2, t.getLastname());
-         pre.setString(3, t.getRank()+"");
+         pre.setString(3, t.getName());
           pre.setString(4, t.getCategorie());
 
         pre.executeUpdate();   

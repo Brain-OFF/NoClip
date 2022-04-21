@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ReservationFXMLController">
+   <children>
+      <DatePicker fx:id="datepickerstart" layoutX="120.0" layoutY="69.0" />
+      <DatePicker fx:id="datepickerend" layoutX="120.0" layoutY="120.0" />
+      <RadioButton fx:id="radiodispo" layoutX="160.0" layoutY="173.0" mnemonicParsing="false" text="coach dispo" />
+      <TextField fx:id="textcoachid" layoutX="136.0" layoutY="224.0" />
+      <TableView fx:id="tableviewreservation" layoutX="370.0" layoutY="69.0" onMouseClicked="#tableview_clicked" prefHeight="250.0" prefWidth="531.0">
+        <columns>
+          <TableColumn fx:id="colid" prefWidth="49.0" text="id" />
+          <TableColumn fx:id="coltempsstart" prefWidth="132.0" text="tempsstart" />
+            <TableColumn fx:id="coltempsend" prefWidth="224.0" text="tempsend" />
+            <TableColumn fx:id="coldispo" minWidth="0.0" prefWidth="52.0" text="dispo" />
+            <TableColumn fx:id="colcoachid" prefWidth="67.0" text="coachid" />
+        </columns>
+      </TableView>
+      <Label layoutX="39.0" layoutY="74.0" text="start date" />
+      <Label layoutX="41.0" layoutY="125.0" text="end date" />
+      <Label layoutX="52.0" layoutY="194.0" text="dispo" />
+      <Label layoutX="43.0" layoutY="229.0" text="coach id" />
+      <Button fx:id="ajout" layoutX="544.0" layoutY="395.0" mnemonicParsing="false" onAction="#ajout" text="add" />
+      <Button fx:id="modif" layoutX="644.0" layoutY="395.0" mnemonicParsing="false" onAction="#update" text="modify" />
+      <Button fx:id="delete" layoutX="751.0" layoutY="395.0" mnemonicParsing="false" onAction="#delete" text="delete" />
+      <ImageView fitHeight="199.0" fitWidth="199.0" layoutX="21.0" layoutY="266.0">
+         <image>
+            <Image url="@../sqs.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

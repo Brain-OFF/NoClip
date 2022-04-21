@@ -5,11 +5,12 @@
  */
 package Entities;
 import java.sql.Date;
+import java.util.Comparator;
 /**
  *
  * @author xDrais
  */
-public class Reservation {
+public class Reservation implements Comparable<Reservation>{
     
     
 private int id , coach ;
@@ -96,6 +97,17 @@ public String idtoString ()
     }
 
 
+@Override
+  public int compareTo(Reservation r) 
+  {
+      return tempsstart.compareTo(r.tempsstart);
+  }
+
+  
+
+    public Reservation(String tempsstart) {
+        this.tempsstart = tempsstart;
+    }
   
     
 }
