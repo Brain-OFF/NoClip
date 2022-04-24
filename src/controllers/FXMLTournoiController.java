@@ -372,7 +372,18 @@ private Stage stage;
             discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
             tvTour.setItems(list);
     }   
-    }
+    
+    @FXML
+    void Stat(MouseEvent event) throws IOException {
+        
+ Parent root = FXMLLoader.load(getClass().getResource("/Gui/ChartFxml.fxml"));
+ stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+  scene = new Scene(root);
+  stage.setScene(scene);
+  scene.getStylesheets().add("/dark-theme.css");
+
+  stage.show();
+    }}
     
     
    

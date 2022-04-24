@@ -38,5 +38,6 @@
       <TextField fx:id="search_field" layoutX="33.0" layoutY="526.0" />
       <Button fx:id="search" layoutX="258.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#search_s" text="search" />
       <Button fx:id="Trie" layoutX="379.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#Trie_T" text="Trie" />
+      <Button layoutX="600.0" layoutY="553.0" mnemonicParsing="false" onMouseClicked="#Stat" text="Stat" />
    </children>
 </AnchorPane>
