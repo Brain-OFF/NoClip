@@ -333,8 +333,9 @@ private Stage stage;
                 cathegorie.setItems(options);
                 dateT.setValue(LocalDate.now());
         Connection con = MyDB.getInstance().getCon();
-        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` where `nom` LIKE '%"+search_field.getText().toString()+"%'");
-        while(rs.next()){
+        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` where nom LIKE '%"+search_field.getText().toString()+"%'"+"or cathegorie LIKE '%"+
+                search_field.getText().toString()+"%'"+"or discription  LIKE '%"+search_field.getText().toString()+"%'"+"or date LIKE '%"+search_field.getText().toString()+"%'");
+        while(rs.next()){ 
         list.add(new Tournoi(rs.getInt(1),rs.getString("nom"),rs.getString("date"),rs.getString("cathegorie"),rs.getString("discription")));
         }
         
