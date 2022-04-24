@@ -25,7 +25,7 @@
       <TextField fx:id="tournoi" disable="true" layoutX="37.0" layoutY="175.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
       <ComboBox fx:id="ranke" layoutX="38.0" layoutY="246.0" prefHeight="31.0" prefWidth="118.0" promptText="Rank" />
       <TextField fx:id="email1" layoutX="37.0" layoutY="105.0" prefHeight="31.0" prefWidth="118.0" promptText="Email@XXX.XXX" />
-      <RadioButton fx:id="confirmation" layoutX="38.0" layoutY="319.0" mnemonicParsing="false" text="conformation" />
+      <RadioButton fx:id="confirmation" layoutX="38.0" layoutY="319.0" mnemonicParsing="false" text="confirmation" />
       
       <Button fx:id="Add_in" disable="true" layoutX="13.0" layoutY="390.0" mnemonicParsing="false" onAction="#Add_inc" prefHeight="31.0" prefWidth="144.0" text="Inscrire" />
       <ImageView fitHeight="144.0" fitWidth="153.0" layoutX="9.0" layoutY="456.0">

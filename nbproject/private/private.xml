@@ -3,14 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/Gui/FXMLADD_inc.fxml</file>
             <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/controllers/FXMLADD_incController.java</file>
             <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/controllers/FXMLIncriptionController.java</file>
+            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/Gui/FXMLADD_inc.fxml</file>
+            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/Entities/Tournoi.java</file>
             <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/pidev3a37/front.java</file>
-            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/Gui/FXMLIncription.fxml</file>
             <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/controllers/FXMLTournoiController.java</file>
-            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/pidev3a37/dark-theme.css</file>
+            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/dark-theme.css</file>
+            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/Gui/FXMLIncription.fxml</file>
             <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/pidev3a37/fmx.java</file>
+            <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/Entities/Inscription_t.java</file>
             <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/pidev3a37/Pidev3a37.java</file>
             <file>file:/C:/Users/Taha/Desktop/Pidev3a37/src/Gui/FXMLTournoi.fxml</file>
         </group>

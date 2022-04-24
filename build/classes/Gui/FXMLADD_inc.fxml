@@ -6,12 +6,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.FXMLADD_incController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLADD_incController">
    <children>
-      <TableView fx:id="tvTour" layoutX="173.0" onMouseClicked="#tableview_clicked" prefHeight="411.0" prefWidth="528.0">
+      <TableView fx:id="tvTour" layoutX="173.0" onMouseClicked="#tableview_clicked" prefHeight="643.0" prefWidth="667.0">
          <columns>
             <TableColumn fx:id="idT" prefWidth="98.0" text="Id Tournoi" />
             <TableColumn fx:id="nomT" prefWidth="60.0" text="Nom" />
@@ -24,7 +25,13 @@
       <TextField fx:id="tournoi" disable="true" layoutX="37.0" layoutY="175.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
       <ComboBox fx:id="ranke" layoutX="38.0" layoutY="246.0" prefHeight="31.0" prefWidth="118.0" promptText="Rank" />
       <TextField fx:id="email1" layoutX="37.0" layoutY="105.0" prefHeight="31.0" prefWidth="118.0" promptText="Email@XXX.XXX" />
-      <RadioButton fx:id="confirmation" layoutX="38.0" layoutY="319.0" mnemonicParsing="false" text="conformation" />
-      <Button fx:id="Add_in" disable="true" layoutX="14.0" layoutY="366.0" mnemonicParsing="false" onAction="#Add_inc" text="Inscrire" />
+      <RadioButton fx:id="confirmation" layoutX="38.0" layoutY="319.0" mnemonicParsing="false" text="confirmation" />
+      
+      <Button fx:id="Add_in" disable="true" layoutX="13.0" layoutY="390.0" mnemonicParsing="false" onAction="#Add_inc" prefHeight="31.0" prefWidth="144.0" text="Inscrire" />
+      <ImageView fitHeight="144.0" fitWidth="153.0" layoutX="9.0" layoutY="456.0">
+         <image>
+            <Image url="@../sqs.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

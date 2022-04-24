@@ -137,7 +137,7 @@ int id_selected;
                         int savedValue = Integer.parseInt(tournoi.getText());
                         int x;
                         String b = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-                       Pattern emapat = Pattern.compile(b, Pattern.CASE_INSENSITIVE);
+                        Pattern emapat = Pattern.compile(b, Pattern.CASE_INSENSITIVE);
                         Matcher m = emapat.matcher(email1.getText().toString());
                         boolean bb;
                        bb=m.matches();

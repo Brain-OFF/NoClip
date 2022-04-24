@@ -11,6 +11,8 @@ import Services.PersonneService;
 import Utils.MyDB;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,6 +49,10 @@ import javax.swing.JOptionPane;
 import pidev3a37.fmx;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime; 
+import java.util.List;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 /**
  * FXML Controller class
  *
@@ -56,7 +62,9 @@ public class FXMLTournoiController implements Initializable {
     ObservableList<Tournoi> data = FXCollections.observableArrayList();
 
 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-            LocalDateTime now = LocalDateTime.now();  
+            LocalDateTime now = LocalDateTime.now(); 
+            @FXML
+    private TextField search_field;
     @FXML
     private TextField nom;
     @FXML
@@ -130,6 +138,11 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
          if(nom.getText().length()!=0 && Discription.getText().length()!=0 && dateT.getValue().toString().length()!=0 && T1.compareTo(td)>0){
           try {
             T.ajouter(T1);
+            Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("User Modified");
+                alert.setContentText("User Has Been Updated");
+                alert.showAndWait();
             tvTour.setItems(list);   
           } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -177,7 +190,11 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                              System.out.println(tvTour.getSelectionModel().getSelectedItem().getId()+"");
        try{
                                        T.Delete(tvTour.getSelectionModel().getSelectedItem().getId());
-                                       
+                                       Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("User Modified");
+                alert.setContentText("User Has Been Updated");
+                alert.showAndWait();
                                        
             JOptionPane.showMessageDialog(null, "Data avec succée!");
             Tournoi selectedItem = tvTour.getSelectionModel().getSelectedItem();
@@ -196,7 +213,11 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                      if(nom.getText().length()!=0 && Discription.getText().length()!=0 && dateT.getValue().toString().length()!=0){
         try {
             T.modifier(t, index);
-            
+            Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("User Modified");
+                alert.setContentText("User Has Been Updated");
+                alert.showAndWait();
         } catch (SQLException ex) {
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -269,8 +290,97 @@ private Stage stage;
         
         
     }
+    public void exceptionerror(Exception e)
+    {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Exception Dialog");
+            alert.setHeaderText("Exception Encountered");
+            alert.setContentText("Exception: "+e.getClass());
+            Exception ex = e;
+            // Create expandable Exception.
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            // Set expandable Exception into the dialog pane.
+            alert.getDialogPane().setExpandableContent(expContent);
+            alert.showAndWait();
+    }
+   
     
-     }
+        @FXML
+    void search_s(MouseEvent event) {
+                list.clear();
+                try{
+                cathegorie.setValue("Rpg");
+                cathegorie.setItems(options);
+                dateT.setValue(LocalDate.now());
+        Connection con = MyDB.getInstance().getCon();
+        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` where `nom` LIKE '%"+search_field.getText().toString()+"%'");
+        while(rs.next()){
+        list.add(new Tournoi(rs.getInt(1),rs.getString("nom"),rs.getString("date"),rs.getString("cathegorie"),rs.getString("discription")));
+        }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+        }           
+            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
+            nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
+            dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
+            cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
+            discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
+            tvTour.setItems(list);
+    }   
+    @FXML
+    void Trie_T(MouseEvent event) {
+        
+  list.clear();
+                try{
+                cathegorie.setValue("Rpg");
+                cathegorie.setItems(options);
+                dateT.setValue(LocalDate.now());
+        Connection con = MyDB.getInstance().getCon();
+        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` ORDER BY date ASC");
+        while(rs.next()){
+        list.add(new Tournoi(rs.getInt(1),rs.getString("nom"),rs.getString("date"),rs.getString("cathegorie"),rs.getString("discription")));
+        }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+        }           
+            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
+            nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
+            dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
+            cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
+            discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
+            tvTour.setItems(list);
+    }   
+    }
+    
+    
+   
+    
+    
+    
+    
+     
 
     
 

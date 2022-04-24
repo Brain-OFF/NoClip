@@ -7,15 +7,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="439.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLTournoiController">
+<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLTournoiController">
    <children>
       <TextField fx:id="nom" layoutX="32.0" layoutY="44.0" promptText="name" />
       <DatePicker fx:id="dateT" layoutX="32.0" layoutY="101.0" prefHeight="31.0" prefWidth="187.0" promptText="date" />
       <TextArea fx:id="Discription" layoutX="32.0" layoutY="229.0" prefHeight="73.0" prefWidth="187.0" promptText="write something " />
-      <Button fx:id="AddT" layoutY="338.0" mnemonicParsing="false" onAction="#AddT" text="AddT" />
-      <TableView fx:id="tvTour" layoutX="242.0" onMouseClicked="#tableview_clicked" prefHeight="441.0" prefWidth="500.0">
+      <Button fx:id="AddT" layoutX="258.0" layoutY="510.0" mnemonicParsing="false" onAction="#AddT" prefHeight="31.0" prefWidth="94.0" text="AddT" />
+      <TableView fx:id="tvTour" layoutX="258.0" layoutY="35.0" onMouseClicked="#tableview_clicked" prefHeight="441.0" prefWidth="500.0">
         <columns>
           <TableColumn fx:id="idT" prefWidth="90.0" text="Id Tournoi" />
           <TableColumn fx:id="nomT" prefWidth="68.0" text="Nom" />
@@ -24,9 +26,17 @@
             <TableColumn fx:id="dateTo" prefWidth="153.0" text="date" />
         </columns>
       </TableView>
-      <Button fx:id="delete" disable="true" layoutX="70.0" layoutY="338.0" mnemonicParsing="false" onAction="#deleteT" text="Delete" />
-      <Button fx:id="updateT" disable="true" layoutX="142.0" layoutY="338.0" mnemonicParsing="false" onAction="#modifierT" prefHeight="31.0" prefWidth="77.0" text="Modifier" />
+      <Button fx:id="delete" disable="true" layoutX="359.0" layoutY="510.0" mnemonicParsing="false" onAction="#deleteT" prefHeight="31.0" prefWidth="94.0" text="Delete" />
+      <Button fx:id="updateT" disable="true" layoutX="471.0" layoutY="510.0" mnemonicParsing="false" onAction="#modifierT" prefHeight="31.0" prefWidth="129.0" text="Modifier" />
       <ComboBox fx:id="cathegorie" layoutX="32.0" layoutY="167.0" prefHeight="31.0" prefWidth="187.0" promptText="cathegorie" />
-      <Button layoutX="13.0" layoutY="396.0" mnemonicParsing="false" onAction="#Trait_inc" text="Gérer les incription" />
+      <Button layoutX="622.0" layoutY="510.0" mnemonicParsing="false" onAction="#Trait_inc" text="Gérer les incription" />
+      <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="46.0" layoutY="342.0">
+         <image>
+            <Image url="@../sqs.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="search_field" layoutX="33.0" layoutY="526.0" />
+      <Button fx:id="search" layoutX="258.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#search_s" text="search" />
+      <Button fx:id="Trie" layoutX="379.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#Trie_T" text="Trie" />
    </children>
 </AnchorPane>
