@@ -50,7 +50,9 @@ import pidev3a37.fmx;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime; 
 import java.util.List;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.Label;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 /**
@@ -59,8 +61,6 @@ import javafx.scene.layout.Priority;
  * @author Taha
  */
 public class FXMLTournoiController implements Initializable {
-    ObservableList<Tournoi> data = FXCollections.observableArrayList();
-
 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
             LocalDateTime now = LocalDateTime.now(); 
             @FXML
@@ -102,6 +102,8 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
      * Initializes the controller class.
      */
     ObservableList <Tournoi> list = FXCollections.observableArrayList();
+        FilteredList<Tournoi> data = new FilteredList<>(list,b->true);
+
     @FXML
     private Button delete;
     @FXML
@@ -126,7 +128,21 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
             cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
             discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
-            tvTour.setItems(list);
+            search_field.textProperty().addListener((observable,oldvalue,newValue)->{
+                data.setPredicate(t->{
+                    if(newValue == null||newValue.isEmpty()){
+                        return true;
+                    }
+                    String lowerCasefilter = newValue.toLowerCase();
+                    if(t.getName().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    if(t.getCathegorie().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    if(t.getDiscription().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    if(t.getDateT().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    else
+                    return false;
+                });
+            });
+            tvTour.setItems(data);
     }   
    
     @FXML
@@ -384,7 +400,35 @@ private Stage stage;
   scene.getStylesheets().add("/dark-theme.css");
 
   stage.show();
-    }}
+    }
+    
+     @FXML
+    void Search_d(InputMethodEvent event) {
+          list.clear();
+                try{
+                cathegorie.setValue("Rpg");
+                cathegorie.setItems(options);
+                dateT.setValue(LocalDate.now());
+        Connection con = MyDB.getInstance().getCon();
+        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` where nom LIKE '%"+search_field.getText().toString()+"%'"+"or cathegorie LIKE '%"+
+                search_field.getText().toString()+"%'"+"or discription  LIKE '%"+search_field.getText().toString()+"%'"+"or date LIKE '%"+search_field.getText().toString()+"%'");
+        while(rs.next()){ 
+        list.add(new Tournoi(rs.getInt(1),rs.getString("nom"),rs.getString("date"),rs.getString("cathegorie"),rs.getString("discription")));
+        }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+        }           
+            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
+            nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
+            dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
+            cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
+            discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
+            tvTour.setItems(list);
+
+    }
+
+}
     
     
    
