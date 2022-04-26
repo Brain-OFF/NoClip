@@ -341,8 +341,7 @@ private Stage stage;
     }
    
     
-        @FXML
-    void search_s(MouseEvent event) {
+        void search_s(MouseEvent event) {
                 list.clear();
                 try{
                 cathegorie.setValue("Rpg");
@@ -366,9 +365,46 @@ private Stage stage;
             tvTour.setItems(list);
     }   
     @FXML
-    void Trie_T(MouseEvent event) {
+    void Stat(MouseEvent event) throws IOException {
         
-  list.clear();
+ Parent root = FXMLLoader.load(getClass().getResource("/Gui/ChartFxml.fxml"));
+ stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+  scene = new Scene(root);
+  stage.setScene(scene);
+  scene.getStylesheets().add("/dark-theme.css");
+
+  stage.show();
+    }
+//    
+//     @FXML
+//    void Search_d(InputMethodEvent event) {
+//          list.clear();
+//                try{
+//                cathegorie.setValue("Rpg");
+//                cathegorie.setItems(options);
+//                dateT.setValue(LocalDate.now());
+//        Connection con = MyDB.getInstance().getCon();
+//        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` where nom LIKE '%"+search_field.getText().toString()+"%'"+"or cathegorie LIKE '%"+
+//                search_field.getText().toString()+"%'"+"or discription  LIKE '%"+search_field.getText().toString()+"%'"+"or date LIKE '%"+search_field.getText().toString()+"%'");
+//        while(rs.next()){ 
+//        list.add(new Tournoi(rs.getInt(1),rs.getString("nom"),rs.getString("date"),rs.getString("cathegorie"),rs.getString("discription")));
+//        }
+//        
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+//        }           
+//            idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
+//            nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
+//            dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
+//            cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
+//            discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
+//            tvTour.setItems(list);
+//
+//    }
+
+    @FXML
+    private void Trie_asc(javafx.event.ActionEvent event) {
+        list.clear();
                 try{
                 cathegorie.setValue("Rpg");
                 cathegorie.setItems(options);
@@ -388,31 +424,18 @@ private Stage stage;
             cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
             discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
             tvTour.setItems(list);
-    }   
-    
-    @FXML
-    void Stat(MouseEvent event) throws IOException {
-        
- Parent root = FXMLLoader.load(getClass().getResource("/Gui/ChartFxml.fxml"));
- stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-  scene = new Scene(root);
-  stage.setScene(scene);
-  scene.getStylesheets().add("/dark-theme.css");
-
-  stage.show();
     }
-    
-     @FXML
-    void Search_d(InputMethodEvent event) {
-          list.clear();
+
+    @FXML
+    private void trie_desc(javafx.event.ActionEvent event) {
+         list.clear();
                 try{
                 cathegorie.setValue("Rpg");
                 cathegorie.setItems(options);
                 dateT.setValue(LocalDate.now());
         Connection con = MyDB.getInstance().getCon();
-        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` where nom LIKE '%"+search_field.getText().toString()+"%'"+"or cathegorie LIKE '%"+
-                search_field.getText().toString()+"%'"+"or discription  LIKE '%"+search_field.getText().toString()+"%'"+"or date LIKE '%"+search_field.getText().toString()+"%'");
-        while(rs.next()){ 
+        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `tournoi` ORDER BY date DESC");
+        while(rs.next()){
         list.add(new Tournoi(rs.getInt(1),rs.getString("nom"),rs.getString("date"),rs.getString("cathegorie"),rs.getString("discription")));
         }
         
@@ -425,8 +448,9 @@ private Stage stage;
             cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
             discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
             tvTour.setItems(list);
-
     }
+
+   
 
 }
     

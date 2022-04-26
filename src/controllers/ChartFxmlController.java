@@ -234,32 +234,29 @@ public static int numeroPDF = 0;
             Date date1 = null;  
             try {
                 date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("date"));
-                System.out.println(date1);
             } catch (ParseException ex) {
                 Logger.getLogger(ChartFxmlController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-                System.out.println(rs.getString("c"));
-                if (!elements.containsKey(rs.getString("cathegorie")))
+                if (date1.getMonth()==i-1)
+                    System.out.println(elements.size());
+                {if (!elements.containsKey(rs.getString("cathegorie")))
                 {
                     elements.put(rs.getString("cathegorie"), new Series<>());
                     elements.get(rs.getString("cathegorie")).setName(rs.getString("cathegorie"));
-                elements.get(rs.getString("cathegorie")).getData().add(new XYChart.Data<> (Integer.toString(i), Double.parseDouble(rs.getString("c"))));
+                    elements.get(rs.getString("cathegorie")).getData().add(new XYChart.Data<> (Integer.toString(date1.getMonth()+1), Double.parseDouble(rs.getString("c"))));
                 }
                 else
                 {
-                    elements.get(rs.getString("cathegorie")).setName(rs.getString("cathegorie"));
-                elements.get(rs.getString("cathegorie")).getData().add(new XYChart.Data<> (Integer.toString(i), Double.parseDouble(rs.getString("c"))));
+                    elements.get(rs.getString("cathegorie")).getData().add(new XYChart.Data<> (Integer.toString(date1.getMonth()+1), Double.parseDouble(rs.getString("c"))));
                 }
                 
-                System.out.println(elements.get(rs.getString("cathegorie")));
-            
+                }
             
         }
         for (Map.Entry<String,Series<String, Double>> entry : elements.entrySet())
             {
             data.add(entry.getValue());
-            System.out.println(entry.getValue());
             }
         bar.setVisible(true);
         pieChart.setVisible(false);
