@@ -48,9 +48,20 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.scene.Group;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
 /**
@@ -67,7 +78,11 @@ public static int numeroPDF = 0;
      @FXML
     private PieChart pieChart;
                  ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
+                 ObservableList<BarChart.Data> listbar = FXCollections.observableArrayList();
+                 
                          Map<String, Integer> hm = new HashMap<String, Integer>();
+    @FXML
+    private BarChart<String, Double> bar;
                         
 
     @Override
@@ -84,7 +99,8 @@ public static int numeroPDF = 0;
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-    }      
+    }
+    
     private Stage stage;
  private Scene scene;
     @FXML
@@ -130,7 +146,138 @@ public static int numeroPDF = 0;
 
         }
     }
-    }   
+
+    @FXML
+    private void StatTournoi(ActionEvent event) {
+        list.clear();
+        bar.setVisible(false);
+        pieChart.setVisible(true);
+        pieChart.setDisable(false);
+        bar.setDisable(true);
+          try{
+              
+        Connection con = MyDB.getInstance().getCon();
+        ResultSet rs = con.createStatement().executeQuery("SELECT cathegorie,COUNT(id) as c FROM `tournoi` group by cathegorie");
+        while(rs.next()){
+            list.add(new PieChart.Data(rs.getString("cathegorie"),rs.getInt(2)));
+        }
+                     pieChart.setData(list);
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+
+    @FXML
+    private void StatInc(ActionEvent event) {
+                list.clear();
+                bar.setVisible(false);
+        pieChart.setVisible(true);
+        pieChart.setDisable(false);
+        bar.setDisable(true);
+
+          try{
+              
+        Connection con = MyDB.getInstance().getCon();
+        ResultSet rs = con.createStatement().executeQuery("SELECT Rank,COUNT(id) as c FROM `inscription_t` group by rank");
+        while(rs.next()){
+            list.add(new PieChart.Data(rs.getString("Rank"),rs.getInt(2)));
+        }
+                     pieChart.setData(list);
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+    @FXML
+    void linechart(ActionEvent event) {
+        
+
+
+        double total = 0;
+        DecimalFormat df2 = new DecimalFormat(".##");
+        Stage stage = new Stage();
+        Scene scene = new Scene(new Group());
+        stage.setTitle("Nombre de reclamations par jour");
+        stage.setWidth(600);
+        stage.setHeight(600);
+
+
+        //defining the axes
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Date");
+        //creating the chart
+        final LineChart<String,Number> lineChart = 
+                new LineChart<String,Number>(xAxis,yAxis);
+                         try{
+              
+        Connection con = MyDB.getInstance().getCon();
+        ObservableList<XYChart.Series<String, Double>> data =
+         FXCollections.observableArrayList();
+                data.clear();
+                 Map <String,Series<String, Double>> elements=new HashMap<String,Series<String, Double>>();
+
+        for (int i=1;i<13;i++)
+        {   
+        ResultSet rs = con.createStatement().executeQuery("SELECT `cathegorie`,`date`,count(`id`) as `c` FROM `tournoi` WHERE MONTH (`date`)='"+i+"' group by `cathegorie`");
+       
+              /*  elements.put("RPG", new Series<>());
+                elements.put("MMORPG", new Series<>());
+                elements.put("MOBA", new Series<>());
+                elements.put("Battle Royale", new Series<>());
+                elements.put("Beat Them All", new Series<>());
+                elements.put("Survival Horror", new Series<>());
+                elements.put("RTS", new Series<>());*/
+
+        while(rs.next()){
+            Date date1 = null;  
+            try {
+                date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("date"));
+                System.out.println(date1);
+            } catch (ParseException ex) {
+                Logger.getLogger(ChartFxmlController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+                System.out.println(rs.getString("c"));
+                if (!elements.containsKey(rs.getString("cathegorie")))
+                {
+                    elements.put(rs.getString("cathegorie"), new Series<>());
+                    elements.get(rs.getString("cathegorie")).setName(rs.getString("cathegorie"));
+                elements.get(rs.getString("cathegorie")).getData().add(new XYChart.Data<> (Integer.toString(i), Double.parseDouble(rs.getString("c"))));
+                }
+                else
+                {
+                    elements.get(rs.getString("cathegorie")).setName(rs.getString("cathegorie"));
+                elements.get(rs.getString("cathegorie")).getData().add(new XYChart.Data<> (Integer.toString(i), Double.parseDouble(rs.getString("c"))));
+                }
+                
+                System.out.println(elements.get(rs.getString("cathegorie")));
+            
+            
+        }
+        for (Map.Entry<String,Series<String, Double>> entry : elements.entrySet())
+            {
+            data.add(entry.getValue());
+            System.out.println(entry.getValue());
+            }
+        bar.setVisible(true);
+        pieChart.setVisible(false);
+        pieChart.setDisable(true);
+        bar.setDisable(false);
+        bar.setData(data);
+        
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+       
+    }
+
+    
+
 
        
     
