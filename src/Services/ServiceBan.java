@@ -51,7 +51,7 @@ public class ServiceBan implements BanServiceI{
 
     @Override
     public List afficher() throws SQLException {
-        String req = "SELECT * FROM `ban` natural join `User`";
+        String req = "SELECT * FROM `ban` inner Join user where user.id=ban.id_user_id";
         System.out.println(req);
         stm = con.createStatement();
         ResultSet rst = stm.executeQuery(req);
@@ -75,7 +75,7 @@ public class ServiceBan implements BanServiceI{
 
     @Override
     public void modifier(Ban b, int id) throws SQLException {
-         String req = "UPDATE `ban` SET `date_fin`="+b.getDate()+",`reason`="+b.getReason()+" WHERE `id`="+id;
+         String req = "UPDATE `ban` SET `date_fin`='"+b.getDate()+"',`reason`='"+b.getReason()+"' WHERE `id`="+id;
         PreparedStatement pre;
         pre = con.prepareStatement(req);
         pre.executeUpdate();       

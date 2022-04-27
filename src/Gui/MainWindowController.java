@@ -68,6 +68,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -435,6 +436,20 @@ public class MainWindowController implements Initializable {
             }
             
         
+    }
+
+    @FXML
+    private void gotobans(javafx.event.ActionEvent event) throws IOException {
+        
+                                
+				StackPane secondaryLayout = new StackPane();
+                                Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/banslist.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
     }
     }    
     

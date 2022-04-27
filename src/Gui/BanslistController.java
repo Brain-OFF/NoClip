@@ -13,6 +13,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -121,16 +126,53 @@ public class BanslistController implements Initializable {
     }    
 
     @FXML
-    private void update(ActionEvent event) {
+    private void update(ActionEvent event) throws SQLException {
+        try
+        {
+        LocalDate d=date.getValue();
+        Date datea = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        DateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+        String datestring1=formatter.format(datea);
+            System.out.println(datestring1);
+        Ban B=new Ban(datestring1, tablebans.getSelectionModel().getSelectedItem().getUser_id(), reason.getText().toString());
+        ServiceBan sb=new ServiceBan();
+        sb.modifier(B, tablebans.getSelectionModel().getSelectedItem().getId());}
+        catch (SQLException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            /*Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("DataBase Exception");
+            alert.setContentText("Please check the database for errors");
+            alert.showAndWait();*/
+            exceptionerror(ex);
+            
+        }
+        
+        filltable();
         
     }
 
     @FXML
     private void delete(ActionEvent event) {
+        try
+        {ServiceBan sb=new ServiceBan();
+        sb.Delete( tablebans.getSelectionModel().getSelectedItem().getId());}
+        catch (SQLException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            /*Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("DataBase Exception");
+            alert.setContentText("Please check the database for errors");
+            alert.showAndWait();*/
+            exceptionerror(ex);
+            
+        }
+        filltable();
     }
 
     @FXML
     private void tableclicked(MouseEvent event) {
+        reason.setText(tablebans.getSelectionModel().getSelectedItem().getReason());
     }
     
 }

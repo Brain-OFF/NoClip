@@ -232,7 +232,6 @@ public class LoginController implements Initializable {
                 stage.close();
                 try {
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/MainWindow.fxml"));
-                     
                     System.out.println("user being logged :"+holder.getUser());
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
