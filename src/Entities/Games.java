@@ -10,7 +10,7 @@ package Entities;
  * @author month
  */
 public class Games {
-    int id;
+    int id,promos_id;
     float prix;
     String name,descreption,img;
 
@@ -76,6 +76,15 @@ public class Games {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public int getPromos_id() {
+        return promos_id;
+    }
+
+    public void setPromos_id(int promos_id) {
+        this.promos_id = promos_id;
+    }
+    
 
     @Override
     public String toString() {

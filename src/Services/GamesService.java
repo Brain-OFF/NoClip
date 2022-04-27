@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -83,24 +84,7 @@ public class GamesService implements IService<Games>{
         return Games;
         
     }
-        public List<Games> displayProduitService() {
-        //nteger id, Integer id_categorie, String titre, String description, String type, float prix_unitaire
-        List<Games> myList = new ArrayList<>();
-        try {
-            String requete = "SELECT * FROM games ";
-            ste = con.prepareStatement(requete);
-            
-              ResultSet rst = stm.executeQuery(requete);
-            while (rst.next()) {
-               Games c = new Games(rst.getInt(1),rst.getFloat(4),rst.getString(3),rst.getString(2),rst.getString(5));
-                myList.add(c);
-            }
-        } catch (SQLException ex) {
-
-            System.out.println(ex.getMessage());
-        }
-        return myList;
-    }
+       
 
     @Override
     public void Delete(int id) throws SQLException {
@@ -123,6 +107,96 @@ String req = "UPDATE Games SET  name = ?, descreption = ?,  prix = ?, img = ? wh
           pre.setString(4, t.getImg());
 
         pre.executeUpdate();   
+    }
+    
+    
+            public List<Games> ShowProduit(){
+        List<Games> Games = new ArrayList<>();
+        String sql="select * from Games";
+        Statement ste;
+       
+        try {
+            ste = con.createStatement();
+            ResultSet rs = ste.executeQuery(sql);
+             while(rs.next()){
+                 Games p = new Games();
+                 p.setId(rs.getInt("id"));
+                 p.setName(rs.getString("name"));
+                 p.setDescreption(rs.getString("descreption"));
+                 p.setPrix(rs.getFloat("prix"));
+                 p.setPromos_id(rs.getInt("promos_id"));
+                
+                 Games.add(p);
+                 
+        }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return Games;
+    }
+      public List<Integer> getId() {
+        List<Integer> Games = new ArrayList<>();
+        String query = "select * from Games";
+        Statement ste;
+        try {
+            ste = con.createStatement();
+            ResultSet rs = ste.executeQuery(query);
+
+            while (rs.next()) {
+        Games.add(rs.getInt(1));
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Games;
+    }
+    public void Rechercher( List<Games> jeu, String nomJeu){
+       
+        
+         jeu.stream().filter(cc->cc.getName().equals(nomJeu)).forEach((t) -> {System.out.println(t);
+        });
+    }
+     public List<Games> cherchejeu(Object o) {
+            String query="";
+            String ch="";
+            int i=0;
+            List<Games> jeu = new ArrayList<>();
+           
+                ch=(String) o;
+                query="SELECT * FROM `Games` WHERE `name` LIKE '%" + ch + "%' OR `descreption` LIKE '%" + ch + "%'";
+          
+            try {
+                //System.out.println(query);
+                GamesService sj=new GamesService();
+                PreparedStatement ste = con.prepareStatement(query);
+                ResultSet rs= ste.executeQuery();
+                while(rs.next()){
+                   
+                  
+                  Games c = new Games();
+                 c.setId(rs.getInt("id"));
+                 c.setName(rs.getString("name"));
+                 c.setDescreption(rs.getString("descreption"));
+                 c.setPrix(rs.getFloat("prix"));
+                 jeu.add(c);
+                 
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            return jeu;   
+        }
+
+ public void TriTournoi(List<Games> jeu){
+        
+        jeu.stream().sorted((o1, o2)->o1.getName().
+                                                                compareTo(o2.getName())).
+                                                                collect(Collectors.toList()).forEach(t-> System.out.println(t));
+        
     }
     
 }

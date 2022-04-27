@@ -66,7 +66,7 @@ public class CardProduitController implements Initializable {
         description.getChildren().add(new Text(dataProduit.getDescreption()));
       
         prix.setText("          "+Float.toString(dataProduit.getPrix())+ "TND");
-        b.setId(Integer.toString(dataProduit.getId()));
+       
 
     }
    

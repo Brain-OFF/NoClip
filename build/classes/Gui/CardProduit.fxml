@@ -13,7 +13,7 @@
         <URL value="@cardproduit.css" />
     </stylesheets>
       <children>
-      <VBox layoutX="94.0" layoutY="113.0" prefHeight="197.0" prefWidth="242.0">
+      <VBox layoutX="22.0" layoutY="27.0" prefHeight="197.0" prefWidth="242.0">
          <children>
             <Label fx:id="espace" prefHeight="31.0" prefWidth="356.0" textAlignment="CENTER" textFill="#6b0000">
                <font>

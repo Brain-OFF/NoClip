@@ -99,7 +99,22 @@ public class GestionGamescatFXMLController implements Initializable {
 
     @FXML
     private void ajouterc(ActionEvent event) {
+         int a=0;
+         String g=tnom.getText();
         GamescatService gs = new GamescatService();
+        if(tnom.getText().length()!=0 && tdesc.getText().length()!=0  ){
+            Connection conxi = MyDB.getInstance().getCon();
+            try {
+                
+                ResultSet rs = conxi.createStatement().executeQuery("SELECT nom FROM `Gamescat`");
+                 while(rs.next()){
+        if(rs.getString("nom").equals(g)){ a=1;}
+        }
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionGamesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        if(a ==0){
         Gamescat Game = new Gamescat(tnom.getText(),tdesc.getText());
         try {
             gs.ajouter(Game);
@@ -127,6 +142,10 @@ public class GestionGamescatFXMLController implements Initializable {
             descg.setCellValueFactory(new PropertyValueFactory<Gamescat,String>("description"));   
             
             tvgames.setItems(list);
+        }else  {JOptionPane.showMessageDialog(null, "erreur nom deja existant");}
+        }
+        else{
+          JOptionPane.showMessageDialog(null, "error un champ est vide");}
     }
     @FXML
     private void tableview_clickedc(MouseEvent event) {

@@ -29,31 +29,16 @@ public class Pidev3a37 {
         
       
         GamesService gs = new GamesService();
- Games p2 = new Games(40,"Foulen","BEN FOULEN","mmorpg");
- Games p3 = new Games(99,"Foulen","BEN FOULEN","rout");
-        try {
-            gs.modifier(p3,28);
-           // gs.ajouter(p2);
-     System.out.println("********************************************");
-     
-            System.out.println(gs.afficher().toString());
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
 
-
-         try {
-     System.out.println("********************************************");
-            System.out.println(gs.afficher().toString());
+  String nchoix="oo";
+         try{
+           
+            int tchoix = Integer.parseInt(nchoix);
+             System.out.println(gs.cherchejeu(tchoix));
             
-            
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        } catch (NumberFormatException e) {
+           System.out.println(gs.cherchejeu(nchoix));
         }
-        
-        
-        
         
     }
     

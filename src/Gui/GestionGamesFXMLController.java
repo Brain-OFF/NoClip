@@ -9,17 +9,22 @@ import Entities.Games;
 import Services.GamesService;
 import Utils.MyDB;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +33,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -35,6 +41,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -80,6 +87,10 @@ public class GestionGamesFXMLController implements Initializable {
     int id_selected;
     @FXML
     private ComboBox<String> categorie;
+    @FXML
+    private TextField ftr;
+    @FXML
+    private Button recherchelIv;
 
     /**
      * Initializes the controller class.
@@ -116,9 +127,24 @@ public class GestionGamesFXMLController implements Initializable {
 
     @FXML
     private void ajouter(ActionEvent event) {
+        int a=0;
         GamesService gs = new GamesService();
         String g=tnom.getText();
-        Games Game = new Games(Float.parseFloat(tprix.getText()),tnom.getText(),tdesc.getText(),timg.getText());
+        //Games Game = new Games(Float.parseFloat(tprix.getText()),tnom.getText(),tdesc.getText(),timg.getText());
+        if(tnom.getText().length()!=0 && tdesc.getText().length()!=0 && tprix.getText().length()!=0  && timg.getText().length()!=0){
+            Connection conxi = MyDB.getInstance().getCon();
+            try {
+                
+                ResultSet rs = conxi.createStatement().executeQuery("SELECT name FROM `Games`");
+                 while(rs.next()){
+        if(rs.getString("name").equals(g)){ a=1;}
+        }
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionGamesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        if(a ==0){
+            Games Game = new Games(Float.parseFloat(tprix.getText()),tnom.getText(),tdesc.getText(),timg.getText());
         try {
             gs.ajouter(Game);
            
@@ -154,8 +180,35 @@ public class GestionGamesFXMLController implements Initializable {
             prixg.setCellValueFactory(new PropertyValueFactory<Games,Float>("prix"));
             tvgames.setItems(list);
     
-    
+     }else  {JOptionPane.showMessageDialog(null, "erreur nom deja existant");}
+        }
+        else{
+          JOptionPane.showMessageDialog(null, "error un champ est vide");}
          
+    }
+     @FXML
+    private void chercherUser(KeyEvent event) {
+     GamesService rs = new GamesService();
+      List<Games> listuser;
+        String tchoix=ftr.getText();
+        try{
+            int nchoix = Integer.parseInt(tchoix);
+            listuser = rs.cherchejeu(nchoix);
+        } catch (NumberFormatException e) {
+            listuser = rs.cherchejeu(tchoix);
+        }
+          ObservableList<Games> items =FXCollections.observableArrayList();
+       for(Games r : listuser) {
+            
+            items.add(r);
+        }
+                
+            idg.setCellValueFactory(new PropertyValueFactory<Games,Integer>("id"));
+            nomg.setCellValueFactory(new PropertyValueFactory<Games,String>("name"));
+            descg.setCellValueFactory(new PropertyValueFactory<Games,String>("descreption"));   
+            prixg.setCellValueFactory(new PropertyValueFactory<Games,Float>("prix"));
+            
+        tvgames.setItems(items);
     }
     @FXML
     private void tableview_clicked(MouseEvent event) {

@@ -37,7 +37,7 @@ public class testFXMain1 extends Application {
             stage.setScene(scene);
             stage.getIcons().add(new Image("sqs.png"));
             scene.getStylesheets().add("/dark-theme.css");
-            stage.setTitle("gestion Games");
+            stage.setTitle("gestion Categories");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(testFXMain1.class.getName()).log(Level.SEVERE, null, ex);
