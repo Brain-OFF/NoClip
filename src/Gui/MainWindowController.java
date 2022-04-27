@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Gui;
+import Entities.Ban;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
@@ -18,6 +19,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import Entities.User;
 import Entities.loggedUser;
+import Services.ServiceBan;
 import java.net.URL;
 import Utils.MyDB;
 import java.sql.Connection;
@@ -33,8 +35,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -109,6 +115,16 @@ public class MainWindowController implements Initializable {
         "writer",
         "user"
     );
+    ObservableList<String> optionsb = 
+    FXCollections.observableArrayList(
+        "1",
+        "2",
+        "7",
+        "14",
+        "30",
+        "1 ans",
+        "Permanent"
+    );
     User Current_user;
     ObservableList <User> list = FXCollections.observableArrayList();
     @FXML
@@ -132,7 +148,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private TextArea ban_reason;
     @FXML
-    private DatePicker date_ban;
+    private ComboBox<String> nb_jours;
     /**
      * Initializes the controller class.
      */
@@ -148,6 +164,17 @@ public class MainWindowController implements Initializable {
             PrintWriter pw = new PrintWriter(sw);
             ex.printStackTrace(pw);
             String exceptionText = sw.toString();
+            optionsb = 
+    FXCollections.observableArrayList(
+        "1",
+        "2",
+        "7",
+        "14",
+        "30",
+        "1 ans",
+        "Permanent"
+    );
+            nb_jours.setItems(optionsb);
 
             Label label = new Label("The exception stacktrace was:");
 
@@ -176,6 +203,8 @@ public class MainWindowController implements Initializable {
         try{
                  ServU=new UserService();
                 status_text.setItems(options);
+                            nb_jours.setItems(optionsb);
+
         ObservableList<User> observableList =ServU.afficherobs();
                id_user.setCellValueFactory(new PropertyValueFactory<User,Integer>("id"));
             username_table.setCellValueFactory(new PropertyValueFactory<User,String>("username"));
@@ -346,6 +375,66 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void ban_button(javafx.event.ActionEvent event) {
+        
+        
+            boolean success = false;
+            ServiceBan ServB=new ServiceBan();
+            String datestring1="";
+            if (nb_jours.getValue()=="Permanent")
+            {
+                 datestring1="2030-12-31";
+                 
+            }
+            else if (nb_jours.getValue()=="1 ans")
+            {
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.YEAR, 1);
+                Date datefin = cal.getTime();
+                DateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+                 datestring1=formatter.format(datefin);
+                 System.out.println(datestring1);
+            }
+            else 
+            {
+                
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, Integer.parseInt(nb_jours.getValue()));
+                Date datefin = cal.getTime();
+                DateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+                 datestring1=formatter.format(datefin);
+                System.out.println(datestring1);
+
+            }
+            Calendar cal = Calendar.getInstance();
+            Date datetoday = cal.getTime();
+            DateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");  
+            
+            
+            try{
+            Ban B=new Ban(datestring1,User_table.getSelectionModel().getSelectedItem().getId(),ban_reason.getText());
+            ServB.ajouter(B);
+            success=true;
+            }
+            catch (SQLException ex)
+            {
+                /*Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+            alert.setHeaderText("SQL Exception");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();*/
+                exceptionerror(ex);
+            }
+            if (success)
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("User Banned");
+                alert.setContentText("User is now banned");
+                alert.showAndWait();
+                filltable();
+            }
+            
+        
     }
     }    
     

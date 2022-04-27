@@ -13,6 +13,15 @@ public class Ban {
     String date;
     int id,user_id;
     String reason;
+    String Username;
+
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
 
     public Ban(String date, int id, int user_id, String reason) {
         this.date = date;

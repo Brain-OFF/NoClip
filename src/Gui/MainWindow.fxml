@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -42,8 +41,9 @@
       <Label fx:id="label_selected_id_user" layoutX="37.0" layoutY="517.0" prefHeight="21.0" prefWidth="138.0" text="Selected ID : " />
       <Label fx:id="User_logged_label" layoutX="251.0" layoutY="786.0" text="Not Connected" textFill="RED" />
       <TextArea fx:id="ban_reason" layoutX="250.0" layoutY="694.0" prefHeight="70.0" prefWidth="278.0" promptText="Reason" />
-      <DatePicker fx:id="date_ban" layoutX="563.0" layoutY="714.0" />
       <Label layoutX="251.0" layoutY="662.0" text="Ban User:" />
       <Button layoutX="842.0" layoutY="714.0" mnemonicParsing="false" onAction="#ban_button" text="Ban" />
+      <ComboBox fx:id="nb_jours" layoutX="610.0" layoutY="713.0" prefWidth="150.0" />
+      <Button layoutX="968.0" layoutY="714.0" mnemonicParsing="false" onAction="#gotobans" text="Go To Bans" />
    </children>
 </AnchorPane>

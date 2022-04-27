@@ -15,5 +15,9 @@ import javafx.collections.ObservableList;
  */
 public interface BanServiceI <B>{
     List<B> Search_ban(int id) throws SQLException;
+    void ajouter(Ban b) throws SQLException;
+    List<B> afficher() throws SQLException;
+    void Delete(int id) throws SQLException;
+    void modifier(Ban b,int id)throws SQLException;
     
 }
