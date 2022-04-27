@@ -72,7 +72,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import javafx.scene.control.PopupControl;
+import org.controlsfx.control.Notifications;
 import pidev3a37.fmx;
+
 
 /**
  * FXML Controller class
@@ -500,6 +503,19 @@ public class MainWindowController implements Initializable {
 				newWindow.setScene(secondScene);
 				newWindow.show();
     }
+
+    @FXML
+    private void History(javafx.event.ActionEvent event) {
+        Notifications.create()
+              .title("Title Text")
+              .text("Hello World 0!")
+              .showWarning();
+    }
+    
+    
+    
+    
+    
     }    
     
 

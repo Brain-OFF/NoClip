@@ -48,5 +48,6 @@
       <Button layoutX="554.0" layoutY="781.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
       <Button layoutX="646.0" layoutY="781.0" mnemonicParsing="false" onAction="#go_to_profile" text="Profile" />
       <Button layoutX="1032.0" layoutY="672.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+      <Button layoutX="951.0" layoutY="781.0" mnemonicParsing="false" onAction="#History" text="History" />
    </children>
 </AnchorPane>
