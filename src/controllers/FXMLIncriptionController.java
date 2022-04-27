@@ -10,12 +10,22 @@ import Entities.Tournoi;
 import Services.Inscroption_TSer;
 import Services.PersonneService;
 import Utils.MyDB;
+import com.gembox.spreadsheet.ExcelFile;
+import com.gembox.spreadsheet.ExcelWorksheet;
+import com.gembox.spreadsheet.SpreadsheetInfo;
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +41,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Cell;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -38,8 +49,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+
+
 
 /**
  * FXML Controller class
@@ -48,6 +69,9 @@ import javax.swing.JOptionPane;
  */
 public class FXMLIncriptionController implements Initializable {
         int id_selected;
+        static {
+        SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
+    }
  ObservableList<String> options = 
     FXCollections.observableArrayList(
         "Bronze",
@@ -59,7 +83,9 @@ public class FXMLIncriptionController implements Initializable {
          "Grand"
     );
     @FXML
-    private TableView<Inscription_t> tv_inc;
+    public TableView<Inscription_t> tv_inc;
+    
+    public TableView tv_incd ;
     @FXML
     private TableColumn<Inscription_t, Integer> id_inc;
     @FXML
@@ -77,6 +103,7 @@ public class FXMLIncriptionController implements Initializable {
      * Initializes the controller class.
      */
         ObservableList <Inscription_t> list = FXCollections.observableArrayList();
+        private static List<Inscription_t> liste = new ArrayList<Inscription_t>();
     @FXML
     private Button delete_inc;
     @FXML
@@ -91,6 +118,10 @@ public class FXMLIncriptionController implements Initializable {
     private RadioButton confirmation;
     @FXML
     private ComboBox<String> ranke;
+    @FXML
+    private Button excel_id;
+    @FXML
+    private Button saveexcel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,7 +131,7 @@ public class FXMLIncriptionController implements Initializable {
         ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `inscription_t`");
         while(rs.next()){
         list.add(new Inscription_t(rs.getInt("id"),rs.getString("user_name"),rs.getString("email"),rs.getInt("tournoi_id"),rs.getString("rank"),rs.getInt("etat")));
-        }
+        liste.add(new Inscription_t(rs.getString("user_name"),rs.getString("email"),rs.getInt("tournoi_id"),rs.getString("rank"),rs.getInt("etat")));        }
         
         } catch (SQLException ex) {
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,6 +144,7 @@ public class FXMLIncriptionController implements Initializable {
             tournoi_id.setCellValueFactory(new PropertyValueFactory<Inscription_t,Integer>("etat"));
 
             tv_inc.setItems(list);
+            tv_incd = tv_inc;
     } 
 
     @FXML
@@ -218,9 +250,23 @@ Parent root = FXMLLoader.load(getClass().getResource("/Gui/FXMLTournoi.fxml"));
         
         
     }
+        
+//private static String[] colums={"nom","email","etat","tournoi"};
+
+
+    @FXML
+    private void excel_action(ActionEvent event) throws IOException {
+       Parent root = FXMLLoader.load(getClass().getResource("/Gui/sample.fxml"));
+ stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+  scene = new Scene(root);
+  stage.setScene(scene);
+  scene.getStylesheets().add("/dark-theme.css");
+  stage.show();
     }
 
-    
+   
+
+}
     
     
     
