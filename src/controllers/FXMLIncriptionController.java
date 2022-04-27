@@ -52,15 +52,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
 
 
+import javafx.scene.control.TableView;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * FXML Controller class
@@ -121,7 +121,7 @@ public class FXMLIncriptionController implements Initializable {
     @FXML
     private Button excel_id;
     @FXML
-    private Button saveexcel;
+    private Button make_excel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -250,10 +250,51 @@ Parent root = FXMLLoader.load(getClass().getResource("/Gui/FXMLTournoi.fxml"));
         
         
     }
+     @FXML
+    private void Make_excel(ActionEvent event) {
+         HSSFWorkbook hssfWorkbook=new HSSFWorkbook();
+        HSSFSheet hssfSheet=  hssfWorkbook.createSheet("Sheet1");
+        HSSFRow firstRow= hssfSheet.createRow(0);
+
+        ///set titles of columns
+        for (int i=0; i<tv_inc.getColumns().size();i++){
+
+            firstRow.createCell((short) i).setCellValue(tv_inc.getColumns().get(i).getText());
+
+        }
+
+
+        for (int row=0; row<tv_inc.getItems().size();row++){
+
+            HSSFRow hssfRow= hssfSheet.createRow(row+1);
+
+            for (int col=0; col<tv_inc.getColumns().size(); col++){
+
+                Object celValue = tv_inc.getColumns().get(col).getCellObservableValue(row).getValue();
+
+                try {
+                    if (celValue != null && Double.parseDouble(celValue.toString()) != 0.0) {
+                        hssfRow.createCell((short) col).setCellValue(Double.parseDouble(celValue.toString()));
+                    }
+                } catch (  NumberFormatException e ){
+
+                    hssfRow.createCell((short) col).setCellValue(celValue.toString());
+                }
+
+            }
+
+        }
+
+        try {
+            hssfWorkbook.write(new FileOutputStream("WorkBook.xls"));
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
         
-//private static String[] colums={"nom","email","etat","tournoi"};
-
-
+    
+    
     @FXML
     private void excel_action(ActionEvent event) throws IOException {
        Parent root = FXMLLoader.load(getClass().getResource("/Gui/sample.fxml"));
@@ -265,8 +306,10 @@ Parent root = FXMLLoader.load(getClass().getResource("/Gui/FXMLTournoi.fxml"));
     }
 
    
+    }
 
-}
+   
+
     
     
     

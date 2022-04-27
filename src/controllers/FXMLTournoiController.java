@@ -6,10 +6,8 @@
 package controllers;
 
 import Entities.Tournoi;
-import Services.IService;
 import Services.PersonneService;
 import Utils.MyDB;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -20,13 +18,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,15 +42,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import pidev3a37.fmx;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime; 
-import java.util.List;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.Label;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import Services.ServiceFacebook;
+import com.restfb.exception.FacebookException;
+import java.io.FileNotFoundException;
 /**
  * FXML Controller class
  *
@@ -122,7 +118,8 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         
         } catch (SQLException ex) {
             Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
-        }           
+        }      
+       
             idT.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id"));
             nomT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("name"));
             dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
@@ -154,6 +151,17 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
          if(nom.getText().length()!=0 && Discription.getText().length()!=0 && dateT.getValue().toString().length()!=0 && T1.compareTo(td)>0){
           try {
             T.ajouter(T1);
+             try{
+            ServiceFacebook fb = new ServiceFacebook();
+            try {
+                fb.publish("hello world", "");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        catch(FacebookException ex){
+            ex.printStackTrace();
+        }
             Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText("User Modified");

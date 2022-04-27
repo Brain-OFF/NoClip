@@ -36,5 +36,6 @@
       </ImageView>
       <Button graphicTextGap="29.0" layoutX="15.0" layoutY="487.0" lineSpacing="28.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="117.0" text="←" />
       <Button fx:id="excel_id" layoutX="349.0" layoutY="435.0" mnemonicParsing="false" onAction="#excel_action" text="excel" />
+      <Button fx:id="make_excel" layoutX="436.0" layoutY="435.0" mnemonicParsing="false" onAction="#Make_excel" text="Make excel" />
    </children>
 </AnchorPane>
