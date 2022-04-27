@@ -9,6 +9,8 @@ import Entities.Coach;
 import Entities.Reservation;
 import Services.ReservationService;
 import Utils.MyDB;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -33,6 +35,12 @@ import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+
+import javafx.scene.control.TableView;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 
 /**
  *
@@ -66,6 +74,8 @@ public class CoachFrontFXML implements Initializable{
 int id_selected;
 DateTimeFormatter localdate = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 LocalDateTime now = LocalDateTime.now();
+    @FXML
+    private Button btexcel;
     @FXML
     
     private void tableview_clicked(MouseEvent event) {
@@ -163,6 +173,51 @@ LocalDateTime now = LocalDateTime.now();
             categoriecoach.setCellValueFactory(new PropertyValueFactory<Coach,String>("categorie"));
             rankcoach.setCellValueFactory(new PropertyValueFactory<Coach,Integer>("rank"));
             tableviewcoach.setItems(list);  
+    }
+
+    @FXML
+    private void exportexcel(ActionEvent event ) {
+        
+         HSSFWorkbook hssfWorkbook=new HSSFWorkbook();
+        HSSFSheet hssfSheet=  hssfWorkbook.createSheet("Sheet1");
+        HSSFRow firstRow= hssfSheet.createRow(0);
+
+        ///set titles of columns
+        for (int i=0; i<tableviewcoach.getColumns().size();i++){
+
+            firstRow.createCell((short) i).setCellValue(tableviewcoach.getColumns().get(i).getText());
+
+        }
+
+
+        for (int row=0; row<tableviewcoach.getItems().size();row++){
+
+            HSSFRow hssfRow= hssfSheet.createRow(row+1);
+
+            for (int col=0; col<tableviewcoach.getColumns().size(); col++){
+
+                Object celValue = tableviewcoach.getColumns().get(col).getCellObservableValue(row).getValue();
+
+                try {
+                    if (celValue != null && Double.parseDouble(celValue.toString()) != 0.0) {
+                        hssfRow.createCell((short) col).setCellValue(Double.parseDouble(celValue.toString()));
+                    }
+                } catch (  NumberFormatException e ){
+
+                    hssfRow.createCell((short) col).setCellValue(celValue.toString());
+                }
+
+            }
+
+        }
+
+        //save excel file and close the workbook
+        try {
+            hssfWorkbook.write(new FileOutputStream("coachfront.xls"));
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }

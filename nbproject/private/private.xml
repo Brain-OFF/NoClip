@@ -6,13 +6,11 @@
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/CoachFrontFXML.java</file>
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/ReservationFXMLController.java</file>
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Services/CoachService.java</file>
-            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Entities/Reservation.java</file>
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Gui/CoachFrontFXML.fxml</file>
-            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Services/ReservationService.java</file>
-            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/pidev3a37/FXMLTEST.java</file>
-            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Gui/ReservationFXML.fxml</file>
-            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/pidev3a37/coachfront.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/FullCalendarView.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Services/IService.java</file>
             <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/TestFXMLController.java</file>
+            <file>file:/C:/Users/xDrais/Documents/NetBeansProjects/pidev%20desktop/src/Controllers/AnchorPaneNode.java</file>
         </group>
     </open-files>
 </project-private>

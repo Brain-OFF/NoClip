@@ -40,5 +40,6 @@
             <Image url="@../sqs.png" />
          </image>
       </ImageView>
+      <Button fx:id="btexcel" layoutX="477.0" layoutY="406.0" mnemonicParsing="false" onAction="#exportexcel" text="excel" />
    </children>   
 </AnchorPane>
