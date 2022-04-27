@@ -190,7 +190,7 @@ public class UserService implements IService<User> {
 
 
       @Override
-    public void modifier(User u, int id) throws SQLException {
+    public User modifier(User u, int id) throws SQLException {
        String pwd=encrypt_password(u.getUsername(),u.getEmail(),u.getPassword());
 
   String req = "UPDATE user SET  username = ?, email = ?,  password = "+pwd+", bio = ? , points = ? where id= " + id;
@@ -204,6 +204,7 @@ public class UserService implements IService<User> {
         pre.setString(3, u.getBio());
         pre.setString(4, u.getPoints()+"");
         pre.executeUpdate();   
+        return u;
    }
 
     @Override

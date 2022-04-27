@@ -45,5 +45,8 @@
       <Button layoutX="842.0" layoutY="714.0" mnemonicParsing="false" onAction="#ban_button" text="Ban" />
       <ComboBox fx:id="nb_jours" layoutX="610.0" layoutY="713.0" prefWidth="150.0" />
       <Button layoutX="968.0" layoutY="714.0" mnemonicParsing="false" onAction="#gotobans" text="Go To Bans" />
+      <Button layoutX="554.0" layoutY="781.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Button layoutX="646.0" layoutY="781.0" mnemonicParsing="false" onAction="#go_to_profile" text="Profile" />
+      <Button layoutX="1032.0" layoutY="672.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
    </children>
 </AnchorPane>

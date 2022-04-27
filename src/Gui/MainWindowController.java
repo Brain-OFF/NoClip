@@ -165,17 +165,7 @@ public class MainWindowController implements Initializable {
             PrintWriter pw = new PrintWriter(sw);
             ex.printStackTrace(pw);
             String exceptionText = sw.toString();
-            optionsb = 
-    FXCollections.observableArrayList(
-        "1",
-        "2",
-        "7",
-        "14",
-        "30",
-        "1 ans",
-        "Permanent"
-    );
-            nb_jours.setItems(optionsb);
+            
 
             Label label = new Label("The exception stacktrace was:");
 
@@ -204,7 +194,7 @@ public class MainWindowController implements Initializable {
         try{
                  ServU=new UserService();
                 status_text.setItems(options);
-                            nb_jours.setItems(optionsb);
+                            
 
         ObservableList<User> observableList =ServU.afficherobs();
                id_user.setCellValueFactory(new PropertyValueFactory<User,Integer>("id"));
@@ -234,6 +224,17 @@ public class MainWindowController implements Initializable {
             try
             {
             filltable();
+            optionsb = 
+    FXCollections.observableArrayList(
+        "1",
+        "2",
+        "7",
+        "14",
+        "30",
+        "1 ans",
+        "Permanent"
+    );
+            nb_jours.setItems(optionsb);
             loggedUser holder = loggedUser.get_instace();
             Current_user= loggedUser.get_instace().getUser();
 
@@ -444,6 +445,54 @@ public class MainWindowController implements Initializable {
                                 
 				StackPane secondaryLayout = new StackPane();
                                 Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/banslist.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
+    }
+
+    @FXML
+    private void logout(javafx.event.ActionEvent event) {
+         loggedUser holder = loggedUser.get_instace();      
+                holder.setUser(null);
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.close();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Login.fxml"));
+                    System.out.println("user being logged :"+holder.getUser());
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    scene.getStylesheets().add("/dark-theme.css");
+                    stage.getIcons().add(new javafx.scene.image.Image("4.png"));
+                    stage.show();
+                    } catch (IOException e) {
+                           exceptionerror(e);
+                    }
+    }
+
+    @FXML
+    private void refresh(javafx.event.ActionEvent event) {
+        try
+        {filltable();
+        loggedUser holder = loggedUser.get_instace();
+            Current_user= loggedUser.get_instace().getUser();
+
+            System.out.println("current"+Current_user);
+            User_logged_label.setText("Current User: " +Current_user.getUsername() +"#"+Current_user.getId());
+            User_logged_label.setTextFill(Color.web("#00FF00", 0.8));}
+        catch (Exception e)
+                    {
+                         exceptionerror(e);
+                    }
+    }
+
+    @FXML
+    private void go_to_profile(javafx.event.ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Profile.fxml"));
 				Scene secondScene = new Scene(bans);
                                 secondScene.getStylesheets().add("/dark-theme.css");
 				Stage newWindow = new Stage();

@@ -19,7 +19,7 @@ public interface IService<T> {
     void ajouter(T t) throws SQLException;
         //void Modifier(T t) throws SQLException;
     void Delete(int id) throws SQLException;
-     void modifier(T t,int id)throws SQLException;
+     User modifier(T t,int id)throws SQLException;
     List<T> afficher() throws SQLException;
     User Login(String U,String pwd) throws SQLException;
     public ObservableList<User> afficherobs() throws SQLException;

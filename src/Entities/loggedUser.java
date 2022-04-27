@@ -24,6 +24,6 @@ public final class loggedUser {
     {
     return this.user;
     }
-
+    
   
 }
