@@ -6,6 +6,7 @@
 package Services;
 
 import Entities.Ban;
+import Entities.History;
 import Entities.User;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -79,6 +80,20 @@ public class ServiceBan implements BanServiceI{
         PreparedStatement pre;
         pre = con.prepareStatement(req);
         pre.executeUpdate();       
+    }
+    public List gethistory() throws SQLException {
+        String req = "SELECT * FROM `history`";
+        System.out.println(req);
+        stm = con.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+        List<History> bans = new ArrayList<History>();
+        System.out.println(rst.toString());
+        while(rst.next()){
+            
+            History u = new History(rst.getInt("id"), rst.getInt("id_banned_user"), rst.getString("date_fin"), rst.getString("type"));
+            bans.add(u);
+        }
+        return bans;
     }
     
 }

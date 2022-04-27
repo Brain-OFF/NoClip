@@ -5,6 +5,7 @@
  */
 package Gui;
 import Entities.Ban;
+import Entities.History;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
@@ -39,12 +40,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -73,6 +78,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import javafx.scene.control.PopupControl;
+import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import pidev3a37.fmx;
 
@@ -153,6 +159,9 @@ public class MainWindowController implements Initializable {
     private TextArea ban_reason;
     @FXML
     private ComboBox<String> nb_jours;
+    
+    List<History> oldlist=new ArrayList<History>();
+    List<History> newlist=new ArrayList<History>();
     /**
      * Initializes the controller class.
      */
@@ -223,7 +232,23 @@ public class MainWindowController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-             
+        ServiceBan ServB=new ServiceBan();
+        try {
+            oldlist=ServB.gethistory();
+            newlist=ServB.gethistory();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             Timeline timeline =
+        new Timeline(new KeyFrame(Duration.millis(500), e ->{
+                 try {
+                     check_on_history ();
+                 } catch (SQLException ex) {
+                     Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             }));
+    timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+    timeline.play();
             try
             {
             filltable();
@@ -512,6 +537,38 @@ public class MainWindowController implements Initializable {
               .showWarning();
     }
     
+    
+    private void check_on_history () throws SQLException
+    {
+        ServiceBan ServB=new ServiceBan();
+        newlist=ServB.gethistory();
+        String un = null;
+        for(int i = 0; i < newlist.size(); i++){
+            
+         if (i>=oldlist.size())
+         {
+             if (newlist.get(i).getType().equals("A"))
+             {
+                 un=ServU.getusername(newlist.get(i).getId_user());
+             Notifications.create()
+              .title("A User got Banned")
+              .text(un+" got banned until "+newlist.get(i).getDate())
+              .showWarning();
+             }
+             if (newlist.get(i).getType().equals("D"))
+             {
+                 un=ServU.getusername(newlist.get(i).getId_user());
+             Notifications.create()
+              .title("A User got UnBanned")
+              .text(un+" got Unbanned !")
+              .showWarning();
+             }
+         }
+         
+      }
+        oldlist=newlist;
+
+    }
     
     
     

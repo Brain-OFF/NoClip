@@ -231,6 +231,21 @@ public class UserService implements IService<User> {
         return u;
         }
     }
+    public String getusername(int id) throws SQLException {
+        String req = "SELECT username FROM `User` where id ="+id;
+        stm = con.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+        String un=id+"";
+        List<User> personnes = new ArrayList<User>();
+        while(rst.next()){
+                    System.out.println("username is "+rst.getString("Username"));
+
+            un= rst.getString("username");
+            
+        }
+        return un;
+        
+    }
 
  
 
