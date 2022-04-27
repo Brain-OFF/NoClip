@@ -5,15 +5,24 @@
  */
 package Gui;
 
+import Entities.Ban;
 import Entities.User;
 import Entities.loggedUser;
+import Services.ServiceBan;
 import Services.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -154,7 +163,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void login_pressed(ActionEvent event) {
+    private void login_pressed(ActionEvent event) throws SQLException, ParseException {
         if (username_log.getText().length()==0 || password_log.getText().length()==0)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -183,8 +192,41 @@ public class LoginController implements Initializable {
             }
             if (success&&U.getId()!=-1)
             {
-                loggedUser holder = loggedUser.get_instace();       
-                    holder.setUser(U);
+                boolean banned=false;
+                
+                ServiceBan sb=new ServiceBan();
+                try
+                {
+                List<Ban>bans=sb.Search_ban(U.getId());
+                
+                
+                Calendar cal = Calendar.getInstance();
+                Date datetoday = cal.getTime();
+               
+                for (Ban B:bans)
+                {
+                     SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");  
+                     Date date1=formatter.parse(B.getDate());  
+                    if (date1.after(datetoday)||date1.equals(datetoday))
+                    {
+                        Alert alert = new Alert(AlertType.ERROR);
+                        alert.setTitle("You Are Banned");
+                        alert.setHeaderText("You have Been banned from Using this service");
+                        alert.setContentText("Your Account Has been banned for '"+B.getReason()+"' until "+B.getDate());
+                        alert.showAndWait();
+                        banned=true;
+                    }
+                }
+                }
+                catch (SQLException ex)
+                {
+                    exceptionerror(ex);
+                    banned=true;
+                }
+                if (!banned)
+                {
+                loggedUser holder = loggedUser.get_instace();      
+                holder.setUser(U);
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.close();
@@ -200,6 +242,7 @@ public class LoginController implements Initializable {
                     } catch (IOException e) {
                            exceptionerror(e);
                     }
+            }
 
             }
             else 
