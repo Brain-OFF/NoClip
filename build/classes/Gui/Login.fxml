@@ -25,7 +25,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="login_button" layoutX="56.0" layoutY="366.0" mnemonicParsing="false" onAction="#login_pressed" text="Login" />
+      <Button fx:id="login_button" layoutX="59.0" layoutY="399.0" mnemonicParsing="false" onAction="#login_pressed" text="Login" />
       <TextField fx:id="username_reg" layoutX="464.0" layoutY="204.0" prefHeight="31.0" prefWidth="244.0" />
       <TextField fx:id="email_reg" layoutX="464.0" layoutY="283.0" prefHeight="31.0" prefWidth="244.0" />
       <CheckBox fx:id="checkbox_register" layoutX="464.0" layoutY="515.0" mnemonicParsing="false" text="I Agree to terms and services" />
@@ -42,5 +42,6 @@
          </image>
       </ImageView>
       <PasswordField fx:id="password_log" layoutX="57.0" layoutY="309.0" prefHeight="31.0" prefWidth="232.0" />
+      <Button layoutX="55.0" layoutY="460.0" mnemonicParsing="false" onAction="#reset_pass" text="Reset Password" />
    </children>
 </AnchorPane>

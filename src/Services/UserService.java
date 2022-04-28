@@ -55,8 +55,8 @@ public class UserService implements IService<User> {
 			
 			// Request setup
 			conn.setRequestMethod("POST");
-			conn.setConnectTimeout(5000);// 5000 milliseconds = 5 seconds
-			conn.setReadTimeout(5000);
+			conn.setConnectTimeout(15000);// 5000 milliseconds = 5 seconds
+			conn.setReadTimeout(15000);
 			
 			// Test if the response from the server is successful
 			int status = conn.getResponseCode();
@@ -99,8 +99,53 @@ public class UserService implements IService<User> {
 			
 			// Request setup
 			conn.setRequestMethod("POST");
-			conn.setConnectTimeout(5000);// 5000 milliseconds = 5 seconds
-			conn.setReadTimeout(5000);
+			conn.setConnectTimeout(15000);// 5000 milliseconds = 5 seconds
+			conn.setReadTimeout(15000);
+			
+			// Test if the response from the server is successful
+			int status = conn.getResponseCode();
+			
+			if (status >= 300) {
+				reader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+				while ((line = reader.readLine()) != null) {
+					responseContent.append(line);
+				}
+				reader.close();
+			}
+			else {
+				reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				while ((line = reader.readLine()) != null) {
+					responseContent.append(line);
+				}
+				reader.close();
+			}
+			log.info("response code: " + status);
+			System.out.println(responseContent.toString());
+		}
+		catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			conn.disconnect();
+                        return responseContent.toString();
+		}
+        }
+    
+    public String Reset_pass(String email)
+        {
+            
+            BufferedReader reader;
+		String line;
+		StringBuilder responseContent = new StringBuilder();
+		try{
+			URL url = new URL("http://127.0.0.1:8000/forgottenjava?email="+email+"");
+			conn = (HttpURLConnection) url.openConnection();
+			
+			// Request setup
+			conn.setRequestMethod("POST");
+			conn.setConnectTimeout(15000);// 5000 milliseconds = 5 seconds
+			conn.setReadTimeout(15000);
 			
 			// Test if the response from the server is successful
 			int status = conn.getResponseCode();

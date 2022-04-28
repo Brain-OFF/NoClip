@@ -42,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -253,6 +254,18 @@ public class LoginController implements Initializable {
                 alert.showAndWait();
             }
         }
+    }
+
+    @FXML
+    private void reset_pass(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                                Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Reset_pass.fxml"));
+				Scene secondScene = new Scene(bans);
+                                //secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
     }
     
 }
