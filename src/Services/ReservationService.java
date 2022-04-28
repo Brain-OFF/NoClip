@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author xDrais
  */
-public class ReservationService implements IService<Reservation> {
+public class ReservationService implements IaService<Reservation> {
 
     Connection con;
     Statement stm;

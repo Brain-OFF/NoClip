@@ -16,7 +16,7 @@
          <children>
             <StackPane layoutX="-5.0" layoutY="-11.0" prefHeight="94.0" prefWidth="986.0" style="-fx-background-color: c24400;" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-11.0">
                <children>
-                  <Text fx:id="topText" boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Produits" textAlignment="JUSTIFY" textOrigin="CENTER">
+                  <Text fx:id="topText" boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des jeux" textAlignment="JUSTIFY" textOrigin="CENTER">
                      <font>
                         <Font name="Arial Bold" size="23.0" />
                      </font>
@@ -37,7 +37,8 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <TextField fx:id="ftr" onKeyReleased="#chercherUser" layoutX="126.0" layoutY="83.0" />
-      <Button fx:id="recherchelIv" layoutX="44.0" layoutY="83.0" mnemonicParsing="false" text="rechercher" />
+      <TextField fx:id="ftr" layoutX="326.0" layoutY="83.0" onKeyReleased="#chercherUser" />
+      <Button fx:id="listfav" layoutX="44.0" layoutY="83.0" mnemonicParsing="false" onAction="#listfav" text="listfav" />
+      <Button fx:id="refresh" layoutX="893.0" layoutY="83.0" mnemonicParsing="false" onAction="#refresh" text="refresh" />
    </children>
 </AnchorPane>

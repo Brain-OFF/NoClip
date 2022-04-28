@@ -6,6 +6,7 @@
 package Services;
 
 import Entities.Games;
+import Entities.User;
 import java.sql.SQLException;
 import java.util.List;
 import Utils.MyDB;
@@ -16,6 +17,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +27,7 @@ import javafx.collections.ObservableList;
  *
  * @author month
  */
-public class GamesService implements IService<Games>{
+public class GamesService implements IaService<Games>{
 
     
        
@@ -67,7 +70,35 @@ public class GamesService implements IService<Games>{
             System.out.println(ex.getMessage());
         }
     }
-
+public void ajouterfav(int g,User u)  {
+    int a=0;
+    int b=0;
+         try {
+             a=g;
+             b=u.getId();
+             Connection con = MyDB.getInstance().getCon();
+             String req = "INSERT INTO `games_user` (`games_id`, `user_id`) VALUES ( "
+                     +a+  ", "+ b+ ") ";
+             stm = con.createStatement();
+             stm.executeUpdate(req);
+         } catch (SQLException ex) {
+             Logger.getLogger(GamesService.class.getName()).log(Level.SEVERE, null, ex);
+         }
+}
+public void removefav(int g,User u)  {
+    int a=0;
+    int b=0;
+         try {
+             a=g;
+             b=u.getId();
+             Connection con = MyDB.getInstance().getCon();
+             String req = "Delete  FROM `games_user` WHERE `games_id`="+a+" and `user_id`="+b+"  ";
+             stm = con.createStatement();
+             stm.executeUpdate(req);
+         } catch (SQLException ex) {
+             Logger.getLogger(GamesService.class.getName()).log(Level.SEVERE, null, ex);
+         }
+}
     @Override
     public List<Games> afficher() throws SQLException {
      String req = "Select * from `Games`";

@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author xDrais
  */
-public class CoachService implements IService<Coach> {
+public class CoachService implements IaService<Coach> {
     
     
      Connection con;

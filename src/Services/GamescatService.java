@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author month
  */
-public class GamescatService implements IService<Gamescat>{
+public class GamescatService implements IaService<Gamescat>{
     
         Connection con;
     Statement stm;

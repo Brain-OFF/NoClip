@@ -19,27 +19,19 @@
     -fx-font-size: 18px;
 }
 
+.button{
+    -fx-focus-traversable: false;
+}
+
+.button:hover{
+    -fx-text-fill: white;
+}
 
 .separator *.line { 
     -fx-background-color: #3C3C3C;
     -fx-border-style: solid;
     -fx-border-width: 1px;
 }
-.button {
-    -fx-focus-traversable: false;
-    -fx-background-color:transparent ;
-    -fx-background-radius:0;
-    -fx-border-color:transparent;
-    -fx-border-width: 0 3 3 0;
-}
-
-.button:hover {
-    -fx-text-fill: white;
-    -fx-background-color:orange;
-    -fx-background-radius:0;
-    -fx-border-width: 0 3 3 0;
-}
-
 
 .scroll-bar{
     -fx-background-color: derive(-fx-base,45%)

@@ -5,13 +5,9 @@
  */
 package pidev3a37;
 
-import Entities.Coach;
-import Entities.Games;
 import Entities.Personne;
-import Entities.Reservation;
-import Services.CoachService;
-import Services.GamesService;
-import Services.ReservationService;
+import Entities.User;
+import Services.UserService;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,18 +23,21 @@ public class Pidev3a37 {
      */
     public static void main(String[] args) {
         
-      
-        GamesService gs = new GamesService();
-
-  String nchoix="oo";
-         try{
-           
-            int tchoix = Integer.parseInt(nchoix);
-             System.out.println(gs.cherchejeu(tchoix));
+        //User u = new User(7, false, "tazarkour", "jaouaniaaw@gmail.com", "wzeazeazeaz", "hehe");
+        UserService us = new UserService();
+        try {
+          //us.ajouter(u);
+          //us.Delete(7);
+          //us.modifier(u, 7);
+            //ps.ajouterr(p2);
+            //System.out.println("personne ajoutee");
+            System.out.println(us.afficher().toString());
+            //us.Login("bingus","walid123456");
             
-        } catch (NumberFormatException e) {
-           System.out.println(gs.cherchejeu(nchoix));
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
+        
         
     }
     
