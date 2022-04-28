@@ -39,7 +39,9 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -530,11 +532,15 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    private void History(javafx.event.ActionEvent event) {
-        Notifications.create()
-              .title("Title Text")
-              .text("Hello World 0!")
-              .showWarning();
+    private void History(javafx.event.ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                                Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/History.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
     }
     
     
@@ -549,10 +555,16 @@ public class MainWindowController implements Initializable {
          {
              if (newlist.get(i).getType().equals("A"))
              {
+                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date1 = LocalDate.parse(newlist.get(i).getDate_debut(), dtf);
+                             LocalDate date2 = LocalDate.parse(newlist.get(i).getDate(), dtf);
+                        long daysBetween;
+                 daysBetween = ChronoUnit.DAYS.between(date1, date2);
+                       
                  un=ServU.getusername(newlist.get(i).getId_user());
              Notifications.create()
-              .title("A User got Banned")
-              .text(un+" got banned until "+newlist.get(i).getDate())
+              .title("A User got Banned ")
+              .text(un+" got banned for "+daysBetween+" Days")
               .showWarning();
              }
              if (newlist.get(i).getType().equals("D"))

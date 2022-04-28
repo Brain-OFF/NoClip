@@ -11,7 +11,23 @@ package Entities;
  */
 public class History {
     int id,id_user;
-    String Date,type;
+    String Date,type,Date_debut;
+
+    public History(int id, int id_user, String Date, String type, String Date_debut) {
+        this.id = id;
+        this.id_user = id_user;
+        this.Date = Date;
+        this.type = type;
+        this.Date_debut = Date_debut;
+    }
+
+    public String getDate_debut() {
+        return Date_debut;
+    }
+
+    public void setDate_debut(String Date_debut) {
+        this.Date_debut = Date_debut;
+    }
 
     public int getId() {
         return id;

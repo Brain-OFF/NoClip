@@ -90,7 +90,24 @@ public class ServiceBan implements BanServiceI{
         System.out.println(rst.toString());
         while(rst.next()){
             
-            History u = new History(rst.getInt("id"), rst.getInt("id_banned_user"), rst.getString("date_fin"), rst.getString("type"));
+            History u = new History(rst.getInt("id"), rst.getInt("id_banned_user"), rst.getString("date_fin"), rst.getString("type"),rst.getString("date_done"));
+            bans.add(u);
+        }
+        return bans;
+    }
+    public List gethistorytable() throws SQLException {
+        String req = "SELECT * FROM `history`";
+        System.out.println(req);
+        stm = con.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+        List<History> bans = new ArrayList<History>();
+        while(rst.next()){
+            
+            History u = new History(rst.getInt("id"), rst.getInt("id_banned_user"), rst.getString("date_fin"), rst.getString("type"),rst.getString("date_done"));
+            if ( rst.getString("type").equals("A"))
+                u.setType("User Banned");
+            if ( rst.getString("type").equals("D"))
+                u.setType("User UnBanned");
             bans.add(u);
         }
         return bans;
