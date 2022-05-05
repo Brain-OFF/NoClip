@@ -35,6 +35,12 @@ import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime; 
+import javafx.collections.transformation.FilteredList;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+import javax.mail.internet.AddressException;
 /**
  * FXML Controller class
  *
@@ -81,6 +87,9 @@ ObservableList<String> options =
     private RadioButton confirmation;
     @FXML
     private Button Add_in;
+    @FXML
+    private TextField search_field;
+        FilteredList<Tournoi> data = new FilteredList<>(list,b->true);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,8 +115,21 @@ ObservableList<String> options =
             dateTo.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("dateT"));   
             cathT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("cathegorie"));
             discT.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("discription"));
-            tvTour.setItems(list);
-    }
+               search_field.textProperty().addListener((observable,oldvalue,newValue)->{
+                data.setPredicate(t->{
+                    if(newValue == null||newValue.isEmpty()){
+                        return true;
+                    }
+                    String lowerCasefilter = newValue.toLowerCase();
+                    if(t.getName().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    if(t.getCathegorie().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    if(t.getDiscription().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    if(t.getDateT().toLowerCase().indexOf(lowerCasefilter)!=-1){return true;}
+                    else
+                    return false;
+                });
+            });
+            tvTour.setItems(data);}
 int id_selected;
     @FXML
     private void tableview_clicked(MouseEvent event) {
@@ -129,9 +151,8 @@ int id_selected;
          
     }
 
-    
     @FXML
-    private void Add_inc(ActionEvent event) throws SQLException {
+    private void Add_inc(ActionEvent event) throws SQLException, Exception {
          int index = id_selected;
                         Inscroption_TSer T = new Inscroption_TSer();
                         int savedValue = Integer.parseInt(tournoi.getText());
@@ -157,7 +178,6 @@ int id_selected;
             T.ajouterInc(t);
               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("success");
-        
          alert.setContentText("inscription ajoutée avec succée!");
          alert.show();
         Connection con = MyDB.getInstance().getCon();
@@ -165,7 +185,9 @@ int id_selected;
                 }else 
          JOptionPane.showMessageDialog(null, "error un champ est vide ou email ou date incorrecte ");
     }
-}   
+  
+    }
+
 
 
 

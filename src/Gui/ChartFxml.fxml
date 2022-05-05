@@ -12,9 +12,9 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChartFxmlController">
    <children>
       <PieChart fx:id="pieChart" layoutX="102.0" prefHeight="546.0" prefWidth="718.0" />
-      <Button layoutX="42.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
-      <Button layoutX="35.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#pdf_ch" text="pdf" />
-      <MenuButton layoutX="17.0" layoutY="329.0" mnemonicParsing="false" text="Detailles">
+      <Button layoutX="16.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="31.0" prefWidth="100.0" text="←" />
+      <Button layoutX="17.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#pdf_ch" prefHeight="31.0" prefWidth="100.0" text="pdf" />
+      <MenuButton layoutX="17.0" layoutY="329.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" text="Detailles">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#StatTournoi" text="Stat cath tournoi" />
           <MenuItem mnemonicParsing="false" onAction="#StatInc" text="Stat Rank des inc" />

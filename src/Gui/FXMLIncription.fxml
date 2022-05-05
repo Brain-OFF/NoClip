@@ -10,32 +10,32 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLIncriptionController">
+<AnchorPane id="AnchorPane" prefHeight="593.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLIncriptionController">
    <children>
-      <TableView fx:id="tv_inc" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#inc_clicked" prefHeight="345.0" prefWidth="735.0">
+      <TableView fx:id="tv_inc" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#inc_clicked" prefHeight="341.0" prefWidth="795.0">
         <columns>
           <TableColumn fx:id="id_inc" prefWidth="75.0" text="Id_inc" />
           <TableColumn fx:id="user_name" prefWidth="119.0" text="user_name" />
             <TableColumn fx:id="email" prefWidth="155.0" text="Email" />
-            <TableColumn fx:id="tournoi_id" prefWidth="136.0" text="Tournoi_id" />
-            <TableColumn fx:id="etat" prefWidth="110.0" text="Etat" />
-            <TableColumn fx:id="Rank" prefWidth="129.0" text="Rank" />
+            <TableColumn fx:id="tournoi_id" prefWidth="179.0" text="Tournoi_id" />
+            <TableColumn fx:id="etat" prefWidth="134.0" text="Etat" />
+            <TableColumn fx:id="Rank" prefWidth="132.0" text="Rank" />
         </columns>
       </TableView>
-      <Button fx:id="delete_inc" disable="true" layoutX="173.0" layoutY="487.0" mnemonicParsing="false" onAction="#Delete_inc" prefHeight="31.0" prefWidth="150.0" text="Delete" />
-      <Button fx:id="modif_inc" disable="true" layoutX="368.0" layoutY="487.0" mnemonicParsing="false" onAction="#mofidifier_inc" prefHeight="31.0" prefWidth="150.0" text="Modifier" />
-      <TextField fx:id="name" layoutX="14.0" layoutY="371.0" prefHeight="31.0" prefWidth="118.0" promptText="Username" />
-      <TextField fx:id="email1" layoutX="14.0" layoutY="435.0" prefHeight="31.0" prefWidth="118.0" promptText="Email" />
-      <TextField fx:id="tournoi" disable="true" layoutX="171.0" layoutY="371.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
-      <RadioButton fx:id="confirmation" layoutX="171.0" layoutY="440.0" mnemonicParsing="false" text="conformation" />
-      <ComboBox fx:id="ranke" layoutX="318.0" layoutY="371.0" prefWidth="150.0" promptText="Rank" />
-      <ImageView fitHeight="141.0" fitWidth="164.0" layoutX="559.0" layoutY="380.0">
+      <Button fx:id="delete_inc" disable="true" layoutX="82.0" layoutY="425.0" mnemonicParsing="false" onAction="#Delete_inc" prefHeight="31.0" prefWidth="150.0" text="Delete" />
+      <Button fx:id="modif_inc" disable="true" layoutX="280.0" layoutY="425.0" mnemonicParsing="false" onAction="#mofidifier_inc" prefHeight="31.0" prefWidth="150.0" text="Modifier" />
+      <TextField fx:id="name" layoutX="31.0" layoutY="356.0" prefHeight="31.0" prefWidth="118.0" promptText="Username" />
+      <TextField fx:id="email1" layoutX="338.0" layoutY="356.0" prefHeight="31.0" prefWidth="118.0" promptText="Email" />
+      <TextField fx:id="tournoi" disable="true" layoutX="189.0" layoutY="356.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
+      <RadioButton fx:id="confirmation" layoutX="483.0" layoutY="361.0" mnemonicParsing="false" text="conformation" />
+      <ComboBox fx:id="ranke" layoutX="623.0" layoutY="356.0" prefWidth="150.0" promptText="Rank" />
+      <ImageView fitHeight="141.0" fitWidth="164.0" layoutX="616.0" layoutY="440.0">
          <image>
             <Image url="@../sqs.png" />
          </image>
       </ImageView>
-      <Button graphicTextGap="29.0" layoutX="15.0" layoutY="487.0" lineSpacing="28.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="117.0" text="←" />
-      <Button fx:id="excel_id" layoutX="349.0" layoutY="435.0" mnemonicParsing="false" onAction="#excel_action" text="excel" />
-      <Button fx:id="make_excel" layoutX="436.0" layoutY="435.0" mnemonicParsing="false" onAction="#Make_excel" text="Make excel" />
+      <Button graphicTextGap="29.0" layoutX="15.0" layoutY="540.0" lineSpacing="28.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="117.0" text="←" />
+      <Button fx:id="excel_id" layoutX="308.0" layoutY="480.0" mnemonicParsing="false" onAction="#excel_action" prefHeight="31.0" prefWidth="94.0" text="excel" />
+      <Button fx:id="make_excel" layoutX="467.0" layoutY="425.0" mnemonicParsing="false" onAction="#Make_excel" text="Make excel" />
    </children>
 </AnchorPane>

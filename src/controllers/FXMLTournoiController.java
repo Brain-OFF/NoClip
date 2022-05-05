@@ -154,7 +154,7 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
              try{
             ServiceFacebook fb = new ServiceFacebook();
             try {
-                fb.publish("hello world", "");
+                fb.publish("a tounament had been created"+""+nom.getText()+""+cathegorie.getValue().toString()+""+dateT.getValue().toString()+""+Discription.getText().toString()+"","");
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(FXMLTournoiController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -164,8 +164,8 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         }
             Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("User Modified");
-                alert.setContentText("User Has Been Updated");
+                alert.setHeaderText("adding tournoi");
+                alert.setContentText("adding tournoi");
                 alert.showAndWait();
             tvTour.setItems(list);   
           } catch (SQLException ex) {

@@ -10,28 +10,29 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLADD_incController">
+<AnchorPane id="AnchorPane" prefHeight="581.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLADD_incController">
    <children>
-      <TableView fx:id="tvTour" layoutX="173.0" onMouseClicked="#tableview_clicked" prefHeight="643.0" prefWidth="667.0">
+      <TableView fx:id="tvTour" layoutX="311.0" layoutY="69.0" onMouseClicked="#tableview_clicked" prefHeight="497.0" prefWidth="529.0">
          <columns>
             <TableColumn fx:id="idT" prefWidth="98.0" text="Id Tournoi" />
             <TableColumn fx:id="nomT" prefWidth="60.0" text="Nom" />
             <TableColumn fx:id="cathT" prefWidth="87.0" text="Cthegorie" />
-            <TableColumn fx:id="discT" minWidth="0.0" prefWidth="128.0" text="Discription" />
-            <TableColumn fx:id="dateTo" prefWidth="154.0" text="date" />
+            <TableColumn fx:id="discT" minWidth="0.0" prefWidth="169.0" text="Discription" />
+            <TableColumn fx:id="dateTo" prefWidth="113.0" text="date" />
          </columns>
       </TableView>
-      <TextField fx:id="name" layoutX="38.0" layoutY="47.0" prefHeight="31.0" prefWidth="118.0" promptText="Username" />
-      <TextField fx:id="tournoi" disable="true" layoutX="37.0" layoutY="175.0" prefHeight="31.0" prefWidth="118.0" promptText="tournoi_id" />
-      <ComboBox fx:id="ranke" layoutX="38.0" layoutY="246.0" prefHeight="31.0" prefWidth="118.0" promptText="Rank" />
-      <TextField fx:id="email1" layoutX="37.0" layoutY="105.0" prefHeight="31.0" prefWidth="118.0" promptText="Email@XXX.XXX" />
-      <RadioButton fx:id="confirmation" layoutX="38.0" layoutY="319.0" mnemonicParsing="false" text="confirmation" />
+      <TextField fx:id="name" layoutX="14.0" layoutY="233.0" prefHeight="31.0" prefWidth="246.0" promptText="Username" />
+      <TextField fx:id="tournoi" disable="true" editable="false" layoutX="14.0" layoutY="335.0" prefHeight="31.0" prefWidth="246.0" promptText="tournoi_id" />
+      <ComboBox fx:id="ranke" layoutX="14.0" layoutY="410.0" prefHeight="31.0" prefWidth="246.0" promptText="Rank" />
+      <TextField fx:id="email1" layoutX="14.0" layoutY="285.0" prefHeight="31.0" prefWidth="246.0" promptText="Email@XXX.XXX" />
+      <RadioButton fx:id="confirmation" layoutX="14.0" layoutY="475.0" mnemonicParsing="false" text="confirmation" />
       
-      <Button fx:id="Add_in" disable="true" layoutX="13.0" layoutY="390.0" mnemonicParsing="false" onAction="#Add_inc" prefHeight="31.0" prefWidth="144.0" text="Inscrire" />
-      <ImageView fitHeight="144.0" fitWidth="153.0" layoutX="9.0" layoutY="456.0">
+      <Button fx:id="Add_in" disable="true" layoutX="80.0" layoutY="543.0" mnemonicParsing="false" onAction="#Add_inc" prefHeight="31.0" prefWidth="144.0" text="Inscrire" />
+      <ImageView fitHeight="144.0" fitWidth="153.0" layoutX="39.0" layoutY="25.0">
          <image>
             <Image url="@../sqs.png" />
          </image>
       </ImageView>
+      <TextField fx:id="search_field" layoutX="318.0" layoutY="25.0" prefHeight="31.0" prefWidth="515.0" promptText="🔍" />
    </children>
 </AnchorPane>

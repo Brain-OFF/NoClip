@@ -13,37 +13,37 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLTournoiController">
+<AnchorPane id="AnchorPane" prefHeight="657.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLTournoiController">
    <children>
       <TextField fx:id="nom" layoutX="32.0" layoutY="44.0" promptText="name" />
       <DatePicker fx:id="dateT" layoutX="32.0" layoutY="101.0" prefHeight="31.0" prefWidth="187.0" promptText="date" />
       <TextArea fx:id="Discription" layoutX="32.0" layoutY="229.0" prefHeight="73.0" prefWidth="187.0" promptText="write something " />
-      <Button fx:id="AddT" layoutX="258.0" layoutY="510.0" mnemonicParsing="false" onAction="#AddT" prefHeight="31.0" prefWidth="94.0" text="AddT" />
-      <TableView fx:id="tvTour" layoutX="258.0" layoutY="35.0" onMouseClicked="#tableview_clicked" prefHeight="441.0" prefWidth="500.0">
+      <Button fx:id="AddT" layoutX="61.0" layoutY="366.0" mnemonicParsing="false" onAction="#AddT" prefHeight="31.0" prefWidth="129.0" text="AddT" />
+      <TableView fx:id="tvTour" layoutX="303.0" layoutY="39.0" onMouseClicked="#tableview_clicked" prefHeight="441.0" prefWidth="512.0">
         <columns>
           <TableColumn fx:id="idT" prefWidth="90.0" text="Id Tournoi" />
           <TableColumn fx:id="nomT" prefWidth="68.0" text="Nom" />
             <TableColumn fx:id="cathT" prefWidth="87.0" text="Cthegorie" />
-            <TableColumn fx:id="discT" minWidth="0.0" prefWidth="101.0" text="Discription" />
-            <TableColumn fx:id="dateTo" prefWidth="153.0" text="date" />
+            <TableColumn fx:id="discT" minWidth="0.0" prefWidth="139.0" text="Discription" />
+            <TableColumn fx:id="dateTo" prefWidth="115.0" text="date" />
         </columns>
       </TableView>
-      <Button fx:id="delete" disable="true" layoutX="359.0" layoutY="510.0" mnemonicParsing="false" onAction="#deleteT" prefHeight="31.0" prefWidth="94.0" text="Delete" />
-      <Button fx:id="updateT" disable="true" layoutX="471.0" layoutY="510.0" mnemonicParsing="false" onAction="#modifierT" prefHeight="31.0" prefWidth="129.0" text="Modifier" />
+      <Button fx:id="delete" disable="true" layoutX="279.0" layoutY="598.0" mnemonicParsing="false" onAction="#deleteT" prefHeight="31.0" prefWidth="94.0" text="Delete" />
+      <Button fx:id="updateT" disable="true" layoutX="428.0" layoutY="599.0" mnemonicParsing="false" onAction="#modifierT" prefHeight="31.0" prefWidth="94.0" text="Modifier" />
       <ComboBox fx:id="cathegorie" layoutX="32.0" layoutY="167.0" prefHeight="31.0" prefWidth="187.0" promptText="cathegorie" />
-      <Button layoutX="622.0" layoutY="510.0" mnemonicParsing="false" onAction="#Trait_inc" text="Gérer les incription" />
-      <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="46.0" layoutY="342.0">
+      <Button layoutX="572.0" layoutY="598.0" mnemonicParsing="false" onAction="#Trait_inc" prefHeight="32.0" prefWidth="129.0" text="Gérer les incription" />
+      <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="28.0" layoutY="493.0">
          <image>
             <Image url="@../sqs.png" />
          </image>
       </ImageView>
-      <Button layoutX="600.0" layoutY="553.0" mnemonicParsing="false" onMouseClicked="#Stat" text="Stat" />
-      <MenuButton layoutX="461.0" layoutY="554.0" mnemonicParsing="false" text="Trie">
+      <Button layoutX="748.0" layoutY="598.0" mnemonicParsing="false" onMouseClicked="#Stat" prefHeight="32.0" prefWidth="94.0" text="Statistique" />
+      <MenuButton layoutX="815.0" layoutY="514.0" mnemonicParsing="false" text="Trie">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#Trie_asc" text="Trie ascendante" />
           <MenuItem mnemonicParsing="false" onAction="#trie_desc" text="Trie_decendante" />
         </items>
       </MenuButton>
-      <TextField fx:id="search_field" layoutX="32.0" layoutY="511.0" />
+      <TextField fx:id="search_field" layoutX="308.0" layoutY="515.0" prefHeight="26.0" prefWidth="487.0" promptText="🔍" />
    </children>
 </AnchorPane>

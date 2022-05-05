@@ -173,7 +173,7 @@ public class FXMLIncriptionController implements Initializable {
          System.out.println("Clicked on " + tv_inc.getSelectionModel().getSelectedItem().getId()); 
                 delete_inc.setDisable(false);
                 int index = tv_inc.getSelectionModel().getSelectedItem().getId();
-                        PersonneService T = new PersonneService();
+                 PersonneService T = new PersonneService();
               modif_inc.setDisable(false);
 
             name.setText(tv_inc.getSelectionModel().getSelectedItem().getUser_name());
@@ -287,7 +287,8 @@ Parent root = FXMLLoader.load(getClass().getResource("/Gui/FXMLTournoi.fxml"));
 
         try {
             hssfWorkbook.write(new FileOutputStream("WorkBook.xls"));
-           
+           JOptionPane.showMessageDialog(null, "excel file is created");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
