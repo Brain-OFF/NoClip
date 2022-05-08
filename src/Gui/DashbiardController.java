@@ -146,5 +146,29 @@ public class DashbiardController implements Initializable {
 				newWindow.setScene(secondScene);
 				newWindow.show();
     }
+
+    @FXML
+    private void go_to_coaches(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/CoachFXML.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
+    }
+
+    @FXML
+    private void go_to_reser(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/ReservationFXML.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
+    }
     
 }
