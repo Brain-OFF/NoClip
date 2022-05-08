@@ -9,6 +9,7 @@ import Entities.Coach;
 import Entities.Reservation;
 import Services.ReservationService;
 import Utils.MyDB;
+import com.mysql.jdbc.Statement;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -35,8 +36,15 @@ import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -76,6 +84,16 @@ DateTimeFormatter localdate = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
 LocalDateTime now = LocalDateTime.now();
     @FXML
     private Button btexcel;
+    @FXML
+    private Button btsms;
+    @FXML
+    private Button btcalendar;
+    
+    private Stage stage;
+ private Scene scene;
+ private Parent root;
+    Statement stm;
+    
     @FXML
     
     private void tableview_clicked(MouseEvent event) {
@@ -216,8 +234,36 @@ LocalDateTime now = LocalDateTime.now();
             hssfWorkbook.write(new FileOutputStream("coachfront.xls"));
            
         } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void showsms(ActionEvent event) throws IOException {
+StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/SMSFXML.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
+    }
+
+    @FXML
+    private void showcalendar(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/fullCalendar.fxml"));
+				Scene secondScene = new Scene(bans);
+                                
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(new Scene(new FullCalendarView(YearMonth.now()).getView()));
+				newWindow.show();
+        
+        
+        
+        
+
     }
     
 }

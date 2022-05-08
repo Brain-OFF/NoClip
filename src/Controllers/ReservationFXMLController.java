@@ -47,6 +47,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.YearMonth;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -90,6 +92,8 @@ DateTimeFormatter localdate = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
 LocalDateTime now = LocalDateTime.now();
     @FXML
     private Button btexcel;
+    @FXML
+    private Button btcalendar;
      
     @FXML
     private void ajout(ActionEvent event) {
@@ -342,6 +346,18 @@ LocalDateTime now = LocalDateTime.now();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void showcalendar(ActionEvent event) throws IOException {
+       StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/fullCalendar.fxml"));
+				Scene secondScene = new Scene(bans);
+                                
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(new Scene(new FullCalendarView(YearMonth.now()).getView()));
+				newWindow.show();
     }
     
 }

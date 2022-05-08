@@ -41,5 +41,7 @@
          </image>
       </ImageView>
       <Button fx:id="btexcel" layoutX="477.0" layoutY="406.0" mnemonicParsing="false" onAction="#exportexcel" text="excel" />
+      <Button fx:id="btsms" layoutX="695.0" layoutY="406.0" mnemonicParsing="false" onAction="#showsms" text="SMS" />
+      <Button fx:id="btcalendar" layoutX="801.0" layoutY="406.0" mnemonicParsing="false" onAction="#showcalendar" text="Calendar" />
    </children>   
 </AnchorPane>
