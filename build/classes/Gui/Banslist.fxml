@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.BanslistController">
+   <children>
+      <TableView fx:id="tablebans" layoutX="260.0" layoutY="38.0" onMouseClicked="#tableclicked" prefHeight="325.0" prefWidth="483.0">
+        <columns>
+          <TableColumn fx:id="id_ban" prefWidth="96.0" text="ID" />
+          <TableColumn fx:id="id_user_ban" prefWidth="99.0" text="ID_USER" />
+            <TableColumn fx:id="username_ban" prefWidth="106.0" text="Username" />
+            <TableColumn fx:id="date_fin" prefWidth="144.0" text="Date Fin" />
+            <TableColumn fx:id="reason_table" prefWidth="75.0" text="Reason" />
+        </columns>
+      </TableView>
+      <DatePicker fx:id="date" layoutX="14.0" layoutY="185.0" />
+      <TextArea fx:id="reason" layoutX="14.0" layoutY="55.0" prefHeight="107.0" prefWidth="200.0" />
+      <Button layoutX="14.0" layoutY="245.0" mnemonicParsing="false" onAction="#update" text="Update" />
+      <Button layoutX="16.0" layoutY="301.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+   </children>
+</AnchorPane>

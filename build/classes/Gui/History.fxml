@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="493.0" prefWidth="694.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Gui.HistoryController">
+   <children>
+      <TableView fx:id="table" layoutX="49.0" layoutY="22.0" prefHeight="439.0" prefWidth="607.0">
+        <columns>
+          <TableColumn fx:id="action" prefWidth="132.0" text="Action" />
+          <TableColumn fx:id="user_banned" prefWidth="189.0" text="User" />
+            <TableColumn fx:id="date_deb" prefWidth="130.0" text="Date_deb" />
+            <TableColumn fx:id="date_fin" prefWidth="155.0" text="Date_Action" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
