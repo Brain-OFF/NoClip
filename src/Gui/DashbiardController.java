@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -119,7 +120,7 @@ public class DashbiardController implements Initializable {
     @FXML
     private void insc_t(ActionEvent event) throws IOException {
         StackPane secondaryLayout = new StackPane();
-                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/FXMLADD_inc.fxml"));
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/FXMLincription.fxml"));
 				Scene secondScene = new Scene(bans);
                                 secondScene.getStylesheets().add("/dark-theme.css");
 				Stage newWindow = new Stage();
@@ -168,6 +169,47 @@ public class DashbiardController implements Initializable {
     private void gestion_chategories(ActionEvent event) throws IOException {
         StackPane secondaryLayout = new StackPane();
                            Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/categorie.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
+    }
+
+
+    @FXML
+    private void got_games(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/GestionGamesFXML.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
+    }
+
+    @FXML
+    private void go_commandes(ActionEvent event) {
+    }
+
+    @FXML
+    private void go_to_games_cat(MouseEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/GestionGamescatFXML.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
+    }
+
+    @FXML
+    private void go_promos(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Gestionpromos.fxml"));
 				Scene secondScene = new Scene(bans);
                                 secondScene.getStylesheets().add("/dark-theme.css");
 				Stage newWindow = new Stage();

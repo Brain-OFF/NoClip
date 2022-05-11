@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="238.0" prefWidth="1023.0" stylesheets="@../../../utils/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.ModelpController">
+   <children>
+      <AnchorPane layoutX="30.0" layoutY="30.0" style="-fx-background-color: white;" styleClass="window-rounded" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#00000033" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+         <children>
+            <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox prefHeight="142.0" prefWidth="466.0" spacing="10.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <children>
+                        <Text fx:id="createdAtText" text="nom produit" wrappingWidth="391.5999755859375">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="desctxt" text="Description" wrappingWidth="366.00001525878906">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="prixtxt" text="prix" wrappingWidth="190">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="prixtxt1" text="....." wrappingWidth="190">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="prixtxt11" text="....." wrappingWidth="190">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="prixtxt111" text="....." wrappingWidth="190">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="94.0" prefWidth="178.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <Pane prefWidth="1.0" style="-fx-background-color: gray;" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </Pane>
+                  <VBox>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Pane fx:id="supppane" prefHeight="13.0" prefWidth="200.0" />
+                              <Button fx:id="heartbtn" layoutX="2.0" layoutY="155.0" mnemonicParsing="false" onAction="#ajoutfav" prefHeight="31.0" prefWidth="37.0" text="♡" />
+                              <Button fx:id="ajpanier" layoutX="53.0" layoutY="155.0" mnemonicParsing="false" onAction="#ajouterpanier" text="ajouter au panier" />
+                              <Text fx:id="dateajouttxt1" layoutX="4.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="liked" wrappingWidth="98.18359375">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="idgames" layoutX="7.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

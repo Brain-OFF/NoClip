@@ -144,7 +144,15 @@ public class FrontMenuController implements Initializable {
     }
 
     @FXML
-    private void gogames(ActionEvent event) {
+    private void gogames(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/AfficheGames.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
     }
 
     @FXML
