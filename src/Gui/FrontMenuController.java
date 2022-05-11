@@ -5,7 +5,6 @@
  */
 package Gui;
 
-import Entities.User;
 import Entities.loggedUser;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,15 +32,13 @@ import javafx.stage.Stage;
  *
  * @author WALID
  */
-public class DashbiardController implements Initializable {
+public class FrontMenuController implements Initializable {
 
-     loggedUser holder;
-    User Current_user=new User();
+    @FXML
+    private Label Username;
+    @FXML
+    private Button admin;
 
-    /**
-     * Initializes the controller class.
-     */
-    
      public void exceptionerror(Exception e)
     {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -75,81 +72,106 @@ public class DashbiardController implements Initializable {
             alert.getDialogPane().setExpandableContent(expContent);
             alert.showAndWait();
     }
-    
+     loggedUser holder;
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        holder= loggedUser.get_instace();
-            Current_user= loggedUser.get_instace().getUser();
+         holder = loggedUser.get_instace();
+        Username.setText("Bienvenue "+holder.getUser().getUsername()+"#"+holder.getUser().getId());
+        if (holder.getUser().getStatus().equals("admin"))
+        {
+            admin.setVisible(true);
+            admin.setDisable(false);
+        }
     }    
 
     @FXML
-    private void go_to_users(ActionEvent event) throws IOException {
+    private void profile(ActionEvent event) throws IOException {
         StackPane secondaryLayout = new StackPane();
-                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/MainWindow.fxml"));
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Profile.fxml"));
 				Scene secondScene = new Scene(bans);
                                 secondScene.getStylesheets().add("/dark-theme.css");
 				Stage newWindow = new Stage();
-				newWindow.setTitle("Second Stage");
+				newWindow.setTitle("Profile");
 				newWindow.setScene(secondScene);
 				newWindow.show();
     }
 
     @FXML
-    private void go_to_tournois(ActionEvent event) throws IOException {
-        StackPane secondaryLayout = new StackPane();
-                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/FXMLTournoi.fxml"));
-				Scene secondScene = new Scene(bans);
-                                secondScene.getStylesheets().add("/dark-theme.css");
-				Stage newWindow = new Stage();
-				newWindow.setTitle("Second Stage");
-				newWindow.setScene(secondScene);
-				newWindow.show();
-    }
-
-    
-
-    private void quit(ActionEvent event) {
-
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.close();
+    private void logout(ActionEvent event) {
+        loggedUser holder = loggedUser.get_instace();      
+                holder.setUser(null);
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.close();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Login.fxml"));
+                    System.out.println("user being logged :"+holder.getUser());
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    scene.getStylesheets().add("/dark-theme.css");
+                    stage.getIcons().add(new javafx.scene.image.Image("4.png"));
+                    stage.show();
+                    } catch (IOException e) {
+                           exceptionerror(e);
+                    }
     }
 
     @FXML
-    private void insc_t(ActionEvent event) throws IOException {
+    private void Tournois(ActionEvent event) throws IOException {
         StackPane secondaryLayout = new StackPane();
                            Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/FXMLADD_inc.fxml"));
 				Scene secondScene = new Scene(bans);
                                 secondScene.getStylesheets().add("/dark-theme.css");
 				Stage newWindow = new Stage();
-				newWindow.setTitle("Second Stage");
+				newWindow.setTitle("Tournois");
 				newWindow.setScene(secondScene);
 				newWindow.show();
     }
 
     @FXML
-    private void go_to_coaches(ActionEvent event) throws IOException {
+    private void coaching(ActionEvent event) throws IOException {
         StackPane secondaryLayout = new StackPane();
-                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/CoachFXML.fxml"));
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/CoachFrontFXML.fxml"));
 				Scene secondScene = new Scene(bans);
                                 secondScene.getStylesheets().add("/dark-theme.css");
 				Stage newWindow = new Stage();
-				newWindow.setTitle("Second Stage");
+				newWindow.setTitle("Coaching");
 				newWindow.setScene(secondScene);
 				newWindow.show();
     }
 
     @FXML
-    private void go_to_reser(ActionEvent event) throws IOException {
-        StackPane secondaryLayout = new StackPane();
-                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/ReservationFXML.fxml"));
+    private void gogames(ActionEvent event) {
+    }
+
+    @FXML
+    private void gonews(ActionEvent event) {
+    }
+
+    @FXML
+    private void go_to_dash(ActionEvent event) throws IOException {
+        if (!holder.getUser().getStatus().equals("admin"))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Hehe");
+                alert.setHeaderText("You sneaky fucking bastard");
+                alert.setContentText("eat shit cuck you fucking piece of shit");
+                alert.showAndWait();
+        }
+        else
+        {
+             StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Dashbiard.fxml"));
 				Scene secondScene = new Scene(bans);
                                 secondScene.getStylesheets().add("/dark-theme.css");
 				Stage newWindow = new Stage();
-				newWindow.setTitle("Second Stage");
+				newWindow.setTitle("Dashboard");
 				newWindow.setScene(secondScene);
 				newWindow.show();
+        }
     }
     
 }

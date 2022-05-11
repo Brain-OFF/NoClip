@@ -232,7 +232,7 @@ public class LoginController implements Initializable {
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.close();
                 try {
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/Dashbiard.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/FrontMenu.fxml"));
                     System.out.println("user being logged :"+holder.getUser());
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
