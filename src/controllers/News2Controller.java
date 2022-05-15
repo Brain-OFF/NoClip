@@ -79,6 +79,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import javax.xml.soap.Node;
 import org.controlsfx.control.Rating;
+import pidev3a37.Linechart;
 
 /**
  * FXML Controller class
@@ -405,7 +406,11 @@ StackPane secondaryLayout = new StackPane();
     @FXML
     private void statestique(MouseEvent event) {
     }
-    
+
+    @FXML
+    private void go_to_stats(ActionEvent event) {
+        
+    }
     
     }
     

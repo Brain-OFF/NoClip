@@ -38,7 +38,7 @@ public class ServiceFacebook {
     public ServiceFacebook(){
         if(client==null){
             try{            
-            token="EAAd5NeRw6h8BAAkuQI5SDp2HPqwprR4g7oshSnGX4WzovKJBWnD9JEzx95S8feSm7ADfaZB2pjo9ZCg4n3INMmefvRBahCuM5p7xON4CoIWDVjMRWCIEsuMmKlYUpPb6G9QVgZBAJmXG5c7ktAv8sgbJ4XvijZC1gbR5CfF7EEhs81R6Vyc9fNQb0KnaZBHIGb6F8lEtPcwZDZD";
+            token="EAAd5NeRw6h8BAPuWDLFbnstm7ftAZAwfyXhTycYWEJ2NAiW6QfAY1kFWHjrz6SNuucDGFuCvu4ACiujXH8lJODvTBrcjvZBgLHqJ5cEdj4mNOwNnFSjINX4lmZC6gb0DbVQTv9ApP2QFF1ADIZA1cNUNcRRmnJUrEUeZAssHxE1w87NHqvYPwcV3cKjU9VoiZCt1lUpOw8ZBgQWl1Xe0Vtg6KXfyPOfH4urj1ry4tKTWu4M7lHusZCuC";
             client = new DefaultFacebookClient(token);
             me= client.fetchObject("me",User.class);
             page=client.fetchObject(pageid,Page.class);
@@ -53,9 +53,9 @@ public class ServiceFacebook {
     }
     public void publish(String post,String imgfilepath)throws FileNotFoundException{
         
-        String path = "C:\\xampp\\htdocs\\NoClip-web-main\\public\\images\\logo.png";
+        String path = "C:\\Users\\WALID\\Desktop\\Files 2\\Pidev3a37 java\\src\\4.png";
         FileInputStream file = new FileInputStream(new File(path));
-        FacebookType img = client.publish(pageid+"/photos",FacebookType.class,BinaryAttachment.with("logo.png", file),Parameter.with("message", "Testing api"));
+        FacebookType img = client.publish(pageid+"/photos",FacebookType.class,BinaryAttachment.with("4.png", file),Parameter.with("message", "Testing api"));
        // client.publish(pageid+"/feed",FacebookType.class,Parameter.with("message",post));
         
         
