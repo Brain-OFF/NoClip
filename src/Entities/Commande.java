@@ -49,6 +49,15 @@ public class Commande {
         this.numtelephone = telephone;
         this.email = email;
     }
+    public Commande(int id, String nom, String prenom, String adressecomplet, String telephone, String email, double total) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adressecomplet;
+        this.numtelephone = telephone;
+        this.email = email;
+        this.total=total;
+    }
 
      public Commande( String nom, String prenom, String adressecomplet, String telephone, String email) {
 

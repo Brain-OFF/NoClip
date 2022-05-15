@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IcomService<T> {
     
-    void ajouter(T t) throws SQLException;
+    void ajouter(T t,int id) throws SQLException;
     
     List<T> afficher() throws SQLException;
      void Delete(int id) throws SQLException ;

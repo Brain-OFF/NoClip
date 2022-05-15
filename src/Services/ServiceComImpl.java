@@ -30,12 +30,12 @@ public class ServiceComImpl implements IcomService<Commande> {
     Connection cnx = MyDB.getInstance().getCon();
 int x=5;
     @Override
-    public void ajouter(Commande t) {
+    public void ajouter(Commande t,int id) {
         
         
         try {
 
-            String requete = "INSERT INTO commande (nom, prenom,adresse,numtelephone,email) values ('"+t.getNom()+"','"+t.getPrenom()+"','"+t.getAdresse()+"','"+t.getNumtelephone()+"','"+t.getEmail()+"')";
+            String requete = "INSERT INTO commande (nom, prenom,adresse,numtelephone,email,totalcost,user_id) values ('"+t.getNom()+"','"+t.getPrenom()+"','"+t.getAdresse()+"','"+t.getNumtelephone()+"','"+t.getEmail()+"','"+t.getTotal()+"','"+id+"')";
               
            Statement st;
                st = cnx.createStatement();
@@ -58,7 +58,7 @@ int x=5;
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Commande(rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"),rs.getString("numtelephone"),rs.getString("email")));
+                list.add(new Commande(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"),rs.getString("numtelephone"),rs.getString("email"),rs.getDouble("totalcost")));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -107,7 +107,7 @@ public List<Commande> cherchecom(Object o) {
             cnx.prepareStatement(requete).executeQuery();
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Commande(rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getString(10)));
+                list.add(new Commande(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"),rs.getString("numtelephone"),rs.getString("email"),rs.getDouble("totalcost")));
             }
 
         } catch (SQLException ex) {

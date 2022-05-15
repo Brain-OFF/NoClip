@@ -28,6 +28,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import pidev3a37.test1FXMain;
 
 /**
  * FXML Controller class
@@ -191,7 +192,15 @@ public class DashbiardController implements Initializable {
     }
 
     @FXML
-    private void go_commandes(ActionEvent event) {
+    private void go_commandes(ActionEvent event) throws IOException {
+        StackPane secondaryLayout = new StackPane();
+                           Parent bans = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/index.fxml"));
+				Scene secondScene = new Scene(bans);
+                                secondScene.getStylesheets().add("/dark-theme.css");
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Second Stage");
+				newWindow.setScene(secondScene);
+				newWindow.show();
     }
 
     @FXML

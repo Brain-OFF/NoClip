@@ -164,7 +164,7 @@ public class IndexController implements Initializable {
             formController af = new formController();
            
             formController.setCom(selectedCommande);
-            Parent root = FXMLLoader.load(getClass().getResource("../../views/commande/form.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Gui/form.fxml"));
             Scene scene = new Scene(root);
             test1FXMain.pStage.setScene(scene);
             test1FXMain.pStage.show();

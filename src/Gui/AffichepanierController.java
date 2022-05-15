@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Entities.Commande;
 import Entities.Games;
 import Entities.Panier;
 import Entities.games_user;
@@ -51,6 +52,7 @@ public class AffichepanierController implements Initializable {
     private VBox mainVBox;
      GamesService ps=new GamesService();
     Entities.loggedUser holder = Entities.loggedUser.get_instace();
+    Entities.CartSingle holdercart=Entities.CartSingle.get_instace();
      ObservableList <Panier> list = FXCollections.observableArrayList();
     @FXML
     private Text topText;
@@ -68,6 +70,7 @@ public class AffichepanierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          List<Games> listProd = ps.ShowProduit();
+         holdercart.setPrix(0);
         Collections.reverse(listProd);
           Connection con = MyDB.getInstance().getCon();
          boolean exist=false;
@@ -77,13 +80,14 @@ public class AffichepanierController implements Initializable {
                   exist=false;   
             
             ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `cart`");
-     
+            
                  
             
             while(rs.next())
             {
                 
                 list.add(new Panier(rs.getInt(1),rs.getInt(2)));
+                
                 
                    for(Panier r : list) {
                        
@@ -112,10 +116,11 @@ public class AffichepanierController implements Initializable {
         Connection con = MyDB.getInstance().getCon();
         
         Parent parent = null;
+        holdercart.setCom();
 //////        float k=0;
         try {
             parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(constants.FXML_MODEL_PROD)));
-
+            
             HBox innerContainer = ((HBox) ((AnchorPane) ((AnchorPane) parent).getChildren().get(0)).getChildren().get(0));
             
             ((Text) innerContainer.lookup("#createdAtText")).setText("Nom Produit : " + abo.getName());
@@ -123,6 +128,10 @@ public class AffichepanierController implements Initializable {
             
             
             ((Text) innerContainer.lookup("#prixtxt")).setText("prix : " + abo.getPrix());
+            double a=holdercart.getPrix()+abo.getPrix();
+            
+            holdercart.setPrix(a);
+            System.out.println("price abc : "+abo.getPrix()+" Price total: "+holdercart.getPrix());
             ((Text) innerContainer.lookup("#idgames")).setText( abo.getId()+"");
       
            
@@ -158,11 +167,15 @@ public class AffichepanierController implements Initializable {
 
     @FXML
     private void passercommande(ActionEvent event) {
+        
+        
+        
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
          try {
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Gui/form.fxml"));
                     System.out.println("user being logged :"+holder.getUser());
+                    System.out.println("price :"+holdercart.getPrix());
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     scene.getStylesheets().add("/dark-theme.css");

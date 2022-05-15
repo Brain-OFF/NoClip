@@ -117,22 +117,20 @@ public class formController implements Initializable {
             if (commande != null) {
                 ServiceComImpl sp = new ServiceComImpl();
                 Commande p = new Commande(commande.getId(), tfNom.getText(), tfprenom.getText(), tfadressecomplet.getText(), tftelephone.getText(),tfemail.getText());
-                 
+                  p.setTotal(Entities.CartSingle.get_instace().getPrix());
                 sp.modifier(p, getCom().getId());
                
                 JOptionPane.showMessageDialog(null, "Commande modifiée !");
               
             } else {
                 ServiceComImpl sp = new ServiceComImpl();
- Commande p = new Commande(tfNom.getText(), tfprenom.getText(), tfadressecomplet.getText(), tftelephone.getText(),tfemail.getText());           
-                sp.ajouter(p);
+ Commande p = new Commande(tfNom.getText(), tfprenom.getText(), tfadressecomplet.getText(), tftelephone.getText(),tfemail.getText());
+ p.setTotal(Entities.CartSingle.get_instace().getPrix());
+                sp.ajouter(p,Entities.loggedUser.get_instace().getUser().getId());
                 JOptionPane.showMessageDialog(null, "commande ajoutée !");
             }
 
-            Parent root = FXMLLoader.load(getClass().getResource("/Gui/index.fxml"));
-            Scene scene = new Scene(root);
-            test1FXMain.pStage.setScene(scene);
-            test1FXMain.pStage.show();
+            
         }}
     
 
